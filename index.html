@@ -3,7 +3,7 @@
  <meta charset="utf-8"/>
  <meta content="width=device-width,initial-scale=1" name="viewport"/>
  <title>
-  Vlootanalyse
+  Vloot Analyse Intern
  </title>
  <style>
   * {
@@ -1302,6 +1302,54 @@ footer {
     gap: 16px;
   }
 }
+  /* V7: Excel-bestand kiezen of naar de uploadknop slepen. */
+.filePicker {
+  position: relative;
+  border-radius: 7px;
+}
+.filePicker.drag-over .filePickerButton {
+  border-color: var(--traxall-orange);
+  background: #fff1d6;
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, .22);
+}
+.filePicker.drag-over .filePickerButton::after {
+  content: "Loslaten om te uploaden";
+  position: absolute;
+  left: 50%;
+  bottom: -23px;
+  transform: translateX(-50%);
+  width: max-content;
+  color: var(--traxall-orange);
+  font-size: 11px;
+  font-weight: 700;
+}
+  /* V8: robuuste sleepzone over het volledige uploadgedeelte. */
+.uploadBlock {
+  position: relative;
+  border: 2px dashed transparent;
+  border-radius: 9px;
+  padding: 6px 10px;
+  transition: border-color .15s ease, background .15s ease, box-shadow .15s ease;
+}
+.uploadBlock.drag-over {
+  border-color: var(--traxall-orange);
+  background: #fff8e8;
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, .18);
+}
+.uploadBlock.drag-over::after {
+  content: "Laat het Excel-bestand hier los";
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 7px;
+  color: var(--traxall-blue);
+  background: rgba(255, 248, 232, .96);
+  font-weight: 700;
+  pointer-events: none;
+}
  </style>
  <div class="header-space">
   <header id="brandHeader">
@@ -1311,7 +1359,7 @@ footer {
     </div>
     <div class="brand-copy">
      <h1>
-      Vlootanalyse
+      Vloot Analyse Intern
      </h1>
     </div>
     <div aria-hidden="true" class="brand-spacer">
@@ -1322,7 +1370,7 @@ footer {
  <main>
   <div class="overviewGrid">
    <section class="overviewBox overviewControls">
-    <section class="uploadBlock">
+    <section aria-label="Kies of sleep een Full Fleetoverview Excel-bestand hierheen" class="uploadBlock" id="fileDropZone" role="button" tabindex="0">
      <div class="upload">
       <div>
        <label for="file">
@@ -1642,7 +1690,40 @@ function analyze(rows,ref){const counts=new Map();rows.forEach(r=>{if(r.id&&['ac
 function recalc(){let ref=dateValue($('reference').value);if(ref===null)return;analyzed=analyze(records,ref);$('active').textContent=new Set(analyzed.filter(r=>r.key==='actief'&&r.plate).map(r=>norm(r.plate).replace(/[-\s]/g,''))).size;$('orange').textContent=analyzed.filter(r=>r.band==='orange').length;$('red').textContent=analyzed.filter(r=>r.band==='red').length;$('dups').textContent='('+new Set(analyzed.filter(r=>r.duplicate).map(r=>r.id)).size+' ID’s)';$('quality').textContent='('+analyzed.filter(r=>r.issues.length).length+')';render();recalcContracts();const ids=new Set(analyzed.filter(r=>r.duplicate).map(r=>r.id));$('duplicateBar').textContent=ids.size?ids.size+' dubbele berijder-ID · '+analyzed.filter(r=>r.duplicate).length+' betrokken regels — bekijken':'Geen dubbele berijder-ID’s in Actief / Inleverproces bezig';}
 function signals(r){return [r.band==='red'?(selection(r.key)?'3 maanden verstreken':'5+ dagen'):r.band==='orange'?'2–4 dagen':'',r.duplicate?'Dubbele berijder-ID':'',...r.issues].filter(Boolean)}
 function dateLabel(r){return r.date===null?str(r.rawdate)||'—':new Date(r.date*DAY).toLocaleDateString('nl-NL',{timeZone:'UTC'})}
-function render(){const q=norm($('search').value),status=selectedValues('status');visible=analyzed.filter(r=>(view==='active'?r.key==='actief':view==='duplicates'?r.duplicate:view==='quality'?r.issues.length:view==='attention'?r.band==='red'||r.duplicate:r.band===view)&&(status.includes('*')||status.includes(r.key))&&(!q||norm([r.plate,r.order,r.name,r.id,r.client,r.entity,r.car,r.supplier,r.status].join(' ')).includes(q))).sort((a,b)=>view==='duplicates'?a.id.localeCompare(b.id)||(b.age??-1)-(a.age??-1):(b.age??-1)-(a.age??-1));$('heading').textContent=({attention:'Opvolgen',active:'Actieve kentekens',orange:'Status 2 tot 5 dagen',red:'Statussen die opvolging vragen',duplicates:'Dubbele berijders',quality:'Datacontrole'})[view];document.querySelectorAll('[data-view]').forEach(b=>{b.classList.toggle('selected',b.dataset.view===view);b.setAttribute('aria-pressed',b.dataset.view===view)});$('count').textContent=filename?visible.length+' regels in deze selectie · '+records.length+' regels ingelezen · '+records.filter(r=>r.key==='inactief'||ignored(r.key)).length+' regels genegeerd':'';$('export').disabled=!visible.length;$('body').innerHTML=visible.length?visible.map(r=>`<tr><td>${esc(r.plate||'Geen kenteken')}<div class="muted">${esc(r.order)}</div></td><td>${esc(r.name)||'—'}</td><td>${esc(r.id)||'—'}</td><td>${esc(r.client)}<div class="muted">${esc(r.entity)}</div></td><td>${esc(r.car)}<div class="muted">${esc(r.supplier)}</div></td><td>${esc(r.status)||'—'}</td><td>${esc(dateLabel(r))}</td><td>${r.age??'—'}</td><td>${signals(r).map(s=>`<span class="badge ${s==='Dubbele berijder-ID'?'duplicate':(s==='5+ dagen'||s==='3 maanden verstreken')?'red':s==='2–4 dagen'?'orange':'neutral'}">${esc(s)}</span> `).join('')||'—'}</td><td>${r.row}</td></tr>`).join(''):'<tr><td class="empty" colspan="10">'+(filename?'Geen regels voor deze selectie.':'Upload je Fleetoverview om de analyse te starten.')+'</td></tr>'}
+function render(){const q=norm($('search').value),status=selectedValues('status');visible=analyzed.filter(r=>(view==='active'?r.key==='actief':view==='duplicates'?r.duplicate:view==='quality'?r.issues.length:view==='attention'?r.band==='red'||r.duplicate:r.band===view)&&(status.includes('*')||status.includes(r.key))&&(!q||norm([r.plate,r.order,r.name,r.id,r.client,r.entity,r.car,r.supplier,r.status].join(' ')).includes(q))).sort((a,b)=>view==='duplicates'?a.id.localeCompare(b.id)||(b.age??-1)-(a.age??-1):(b.age??-1)-(a.age??-1));$('heading').textContent=({attention:'Opvolgen',active:'Actieve kentekens',orange:'Status 2 tot 5 dagen',red:'Statussen die opvolging vragen',duplicates:'Dubbele berijders',quality:'Datacontrole'})[view];
+const fileDropZone=$('fileDropZone');
+if(fileDropZone){
+  let dragDepth=0;
+  const prevent=e=>{e.preventDefault();e.stopPropagation()};
+  document.addEventListener('dragover',e=>e.preventDefault());
+  document.addEventListener('drop',e=>{
+    if(!fileDropZone.contains(e.target))e.preventDefault();
+  });
+  fileDropZone.addEventListener('dragenter',e=>{
+    prevent(e);dragDepth++;fileDropZone.classList.add('drag-over');
+  });
+  fileDropZone.addEventListener('dragover',e=>{
+    prevent(e);if(e.dataTransfer)e.dataTransfer.dropEffect='copy';fileDropZone.classList.add('drag-over');
+  });
+  fileDropZone.addEventListener('dragleave',e=>{
+    prevent(e);dragDepth=Math.max(0,dragDepth-1);if(dragDepth===0)fileDropZone.classList.remove('drag-over');
+  });
+  fileDropZone.addEventListener('drop',e=>{
+    prevent(e);dragDepth=0;fileDropZone.classList.remove('drag-over');
+    const files=Array.from(e.dataTransfer?.files||[]);
+    const excel=files.find(f=>/\.xlsx$/i.test(f.name));
+    if(!excel){
+      $('notice').className='error';
+      $('notice').textContent='Sleep een geldig .xlsx-bestand naar het uploadvak.';
+      return;
+    }
+    processFleetFile(excel);
+  });
+  fileDropZone.addEventListener('keydown',e=>{
+    if(e.key==='Enter'||e.key===' '){e.preventDefault();$('file').click()}
+  });
+}
+document.querySelectorAll('[data-view]').forEach(b=>{b.classList.toggle('selected',b.dataset.view===view);b.setAttribute('aria-pressed',b.dataset.view===view)});$('count').textContent=filename?visible.length+' regels in deze selectie · '+records.length+' regels ingelezen · '+records.filter(r=>r.key==='inactief'||ignored(r.key)).length+' regels genegeerd':'';$('export').disabled=!visible.length;$('body').innerHTML=visible.length?visible.map(r=>`<tr><td>${esc(r.plate||'Geen kenteken')}<div class="muted">${esc(r.order)}</div></td><td>${esc(r.name)||'—'}</td><td>${esc(r.id)||'—'}</td><td>${esc(r.client)}<div class="muted">${esc(r.entity)}</div></td><td>${esc(r.car)}<div class="muted">${esc(r.supplier)}</div></td><td>${esc(r.status)||'—'}</td><td>${esc(dateLabel(r))}</td><td>${r.age??'—'}</td><td>${signals(r).map(s=>`<span class="badge ${s==='Dubbele berijder-ID'?'duplicate':(s==='5+ dagen'||s==='3 maanden verstreken')?'red':s==='2–4 dagen'?'orange':'neutral'}">${esc(s)}</span> `).join('')||'—'}</td><td>${r.row}</td></tr>`).join(''):'<tr><td class="empty" colspan="10">'+(filename?'Geen regels voor deze selectie.':'Upload je Fleetoverview om de analyse te starten.')+'</td></tr>'}
 // Offline XLSX reader: ZIP central directory + SpreadsheetML, no external dependencies.
 async function unzip(buffer){const data=new Uint8Array(buffer),dv=new DataView(buffer);let end=-1;for(let i=data.length-22;i>=Math.max(0,data.length-65557);i--)if(dv.getUint32(i,true)===0x06054b50){end=i;break}if(end<0)throw Error('Geen geldig XLSX-bestand.');let p=dv.getUint32(end+16,true),n=dv.getUint16(end+10,true);const files=new Map(),dec=new TextDecoder();for(let j=0;j<n;j++){if(dv.getUint32(p,true)!==0x02014b50)throw Error('Beschadigd Excel-bestand.');let method=dv.getUint16(p+10,true),size=dv.getUint32(p+20,true),nameLen=dv.getUint16(p+28,true),extra=dv.getUint16(p+30,true),comment=dv.getUint16(p+32,true),offset=dv.getUint32(p+42,true),name=dec.decode(data.slice(p+46,p+46+nameLen));files.set(name,{method,size,offset});p+=46+nameLen+extra+comment}return async name=>{const e=files.get(name);if(!e)return null;let start=e.offset+30+dv.getUint16(e.offset+26,true)+dv.getUint16(e.offset+28,true),bytes=data.slice(start,start+e.size);if(e.method===8){bytes=new Uint8Array(await new Response(new Blob([bytes]).stream().pipeThrough(new DecompressionStream('deflate-raw'))).arrayBuffer())}else if(e.method!==0)throw Error('Deze Excel-compressie wordt niet ondersteund.');return dec.decode(bytes)}}
 function xml(s){const d=new DOMParser().parseFromString(s,'application/xml');if(d.getElementsByTagName('parsererror').length)throw Error('Ongeldige Excel-inhoud.');return d}const tags=(el,t)=>Array.from(el.getElementsByTagNameNS('*',t));
@@ -1654,7 +1735,8 @@ const missing=required.filter(n=>!positions.has(norm(n))),duplicates=used.filter
 if(missing.length||duplicates.length)throw Error('Werkblad '+sheet.getAttribute('name')+': '+[missing.length?'ontbrekende kolomnamen: '+missing.join(', '):'',duplicates.length?'dubbele kolomnamen: '+duplicates.join(', '):''].filter(Boolean).join('; ')+'.');
 return {sheet:sheet.getAttribute('name'),rows:rows.slice(h+1).filter(r=>r.values.some(v=>v!==''&&v!=null)).map(({row,values:v})=>{const get=name=>v[positions.get(norm(name))?.[0]];const km=get('Vehicle Mileage');return {row,plate:str(get('License Plate')),order:str(get('Order Nr')),name:[get('Driver First Name'),get('Driver Name')].filter(Boolean).join(' '),id:str(get('Driver ID')),client:str(get('client')),entity:str(get('Entiteit')),car:[get('Brand'),get('Model')].filter(Boolean).join(' '),supplier:str(get('Supplier')),financingMethod:str(get('Financing Method')),status:str(get('Status')),key:norm(get('Status')),rawdate:get('Status since'),date:dateValue(get('Status since'),epoch),contractStart:dateValue(get('Start Date'),epoch),months:Number(get('Contract Duration')),annual:Number(get('Contract Mileage')),lastDate:dateValue(get('Date of Last Mileage'),epoch),km:km===''||km==null?null:Number(km),sourceEnd:dateValue(get('End Date'),epoch)}})}}throw Error('Full Fleetoverview-format niet herkend. Verwacht een kopregel met onder andere Status, License Plate en Driver ID.');}
 
-$('file').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;$('notice').className='';$('notice').textContent='Bestand wordt ingelezen…';$('file').disabled=true;try{if(!/\.xlsx$/i.test(f.name))throw Error('Selecteer een .xlsx-bestand.');const result=await readXlsx(await f.arrayBuffer());records=result.rows;filename=f.name;sheetname=result.sheet;view='attention';$('search').value='';setOptions('status',[['*','Alle statussen'],...Array.from(new Map(records.filter(r=>r.key!=='inactief'&&!ignored(r.key)).map(r=>[r.key,r.status||'Status ontbreekt']))).sort((a,b)=>a[1].localeCompare(b[1]))],['*']);$('fileinfo').textContent=filename+' · Werkblad '+sheetname;$('notice').textContent='Bestand ingelezen. De analyse is bijgewerkt.';$('overviewStatus').classList.remove('is-empty');$('overviewStatus').classList.add('has-data');recalc();await refreshRdw()}catch(err){$('notice').className='error';$('notice').textContent='Inlezen mislukt: '+err.message+(filename?' De vorige analyse blijft zichtbaar.':'')}finally{$('file').disabled=false;$('file').value=''}});
+async function processFleetFile(f){if(!f)return;$('notice').className='';$('notice').textContent='Bestand wordt ingelezen…';$('file').disabled=true;try{if(!/\.xlsx$/i.test(f.name))throw Error('Selecteer een .xlsx-bestand.');const result=await readXlsx(await f.arrayBuffer());records=result.rows;filename=f.name;sheetname=result.sheet;view='attention';$('search').value='';setOptions('status',[['*','Alle statussen'],...Array.from(new Map(records.filter(r=>r.key!=='inactief'&&!ignored(r.key)).map(r=>[r.key,r.status||'Status ontbreekt']))).sort((a,b)=>a[1].localeCompare(b[1]))],['*']);$('fileinfo').textContent=filename+' · Werkblad '+sheetname;$('notice').textContent='Bestand ingelezen. De analyse is bijgewerkt.';$('overviewStatus').classList.remove('is-empty');$('overviewStatus').classList.add('has-data');recalc();await refreshRdw()}catch(err){$('notice').className='error';$('notice').textContent='Inlezen mislukt: '+err.message+(filename?' De vorige analyse blijft zichtbaar.':'')}finally{$('file').disabled=false;$('file').value=''}}
+$('file').addEventListener('change',e=>processFleetFile(e.target.files[0]));
 document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>{view=b.dataset.view;resetStatusSelection();render()});$('reference').onchange=recalc;$('search').oninput=render;
 function ignored(key){return ['wacht op afleverdocumenten','annulering'].includes(key.replace(/^order\s*:\s*/,''))}
 function selection(key){return /^vehicle selection in (process|progress)$/.test(key)}
