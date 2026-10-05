@@ -1242,6 +1242,66 @@ footer {
     width: 76px;
   }
 }
+  /* V6: bediening boven resultaten centreren; resultaatvelden en tabellen ongewijzigd. */
+#contractPanel > h2,
+#contractPanel > p.muted,
+#statusPanel > h2,
+#statusPanel > p.muted {
+  text-align: center;
+}
+
+#contractPanel > .toolbar.settings {
+  justify-content: center;
+  align-items: flex-start;
+  text-align: center;
+  gap: 30px;
+}
+
+#contractPanel > .toolbar.settings label,
+#contractPanel > .toolbar.settings label > .muted {
+  text-align: center;
+}
+
+#contractPanel > .toolbar.settings label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#contractPanel > .toolbar.settings label br {
+  display: none;
+}
+
+#contractPanel > .toolbar.settings input {
+  margin-top: 6px;
+  text-align: center;
+}
+
+#contractPanel > .toolbar:not(.settings):has(#rdwStatus),
+#contractPanel > .contractSummary {
+  justify-content: center;
+  text-align: center;
+}
+
+#statusPanel > .tabs {
+  justify-content: center;
+}
+
+#statusPanel > .tabs button {
+  text-align: center;
+}
+
+/* Alleen de bedieningsrij centreren. Zoekvelden blijven flexibel en tabellen blijven links uitgelijnd. */
+#contractPanel > .toolbar:has(#contractSearch),
+#statusPanel > .toolbar:has(#search) {
+  justify-content: center;
+}
+
+@media (max-width: 760px) {
+  #contractPanel > .toolbar.settings {
+    gap: 16px;
+  }
+}
  </style>
  <div class="header-space">
   <header id="brandHeader">
@@ -1354,9 +1414,6 @@ footer {
    <h2>
     Contractcontrole
    </h2>
-   <p class="muted">
-    Alleen Actief met Financing Method OL of OL LEG · instelbare autoleeftijd bij laatste kilometerregistratie · kilometerstand vanaf 100 km · grootste afwijking bovenaan
-   </p>
    <div class="toolbar settings">
     <label>
      Maximale kilometerstand
@@ -1379,14 +1436,6 @@ footer {
       Autoleeftijd op datum laatste km-stand
      </div>
     </label>
-   </div>
-   <div class="toolbar">
-    <span class="muted" id="rdwStatus" role="status">
-     RDW-gegevens worden na upload opgehaald.
-    </span>
-    <button id="rdwRetry" type="button">
-     Ontbrekende RDW-gegevens opnieuw ophalen
-    </button>
    </div>
    <div class="contractSummary" id="contractSummary">
     Upload een bestand om te beginnen.
@@ -1476,9 +1525,6 @@ footer {
    <h2 id="heading">
     Opvolgen
    </h2>
-   <p class="muted">
-    Standaard: statussen vanaf 5 dagen, voertuigselectie vanaf 3 maanden en dubbele berijder-ID’s. Oranje signalen bekijk je via het oranje vak.
-   </p>
    <div class="tabs">
     <button class="selected" data-view="attention">
      Opvolgen
