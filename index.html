@@ -3,7 +3,7 @@
  <meta charset="utf-8"/>
  <meta content="width=device-width,initial-scale=1" name="viewport"/>
  <title>
-  Vloot analyse intern
+  Vlootanalyse
  </title>
  <style>
   * {
@@ -921,96 +921,434 @@ footer {
     width: 76px;
   }
 }
+  /* Compacte overzichtsrij: upload/navigatie links en status rechts. */
+.overviewGrid {
+  display: grid;
+  grid-template-columns: minmax(360px, .85fr) minmax(620px, 1.65fr);
+  gap: 18px;
+  align-items: stretch;
+  margin-bottom: 18px;
+}
+.overviewBox {
+  min-width: 0;
+  min-height: 176px;
+  padding: 16px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 2px 2px 10px #0003;
+}
+.overviewControls {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 15px;
+}
+.uploadBlock {
+  min-width: 0;
+}
+.uploadBlock .upload {
+  align-items: flex-end;
+  gap: 18px;
+}
+.uploadBlock #fileinfo {
+  margin-top: 10px;
+}
+.uploadBlock #notice {
+  margin-top: 8px;
+}
+.overviewControls .mainTabs {
+  width: auto;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+}
+.overviewStatus {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+}
+.overviewStatus .statusSummary {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  transition: opacity .2s ease, filter .2s ease;
+}
+.overviewStatus.is-empty .statusSummary {
+  pointer-events: none;
+  opacity: .18;
+  filter: grayscale(1);
+}
+.statusPlaceholder {
+  position: absolute;
+  inset: 16px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 20px;
+  color: var(--traxall-muted);
+  text-align: center;
+  background: var(--traxall-soft);
+  border: 1px dashed var(--traxall-line);
+  border-radius: 8px;
+  transition: opacity .2s ease, visibility .2s ease;
+}
+.statusPlaceholder strong {
+  color: var(--traxall-blue);
+  font-size: 16px;
+}
+.statusPlaceholder span {
+  max-width: 420px;
+  font-size: 13px;
+  line-height: 1.45;
+}
+.overviewStatus.has-data .statusPlaceholder {
+  visibility: hidden;
+  opacity: 0;
+}
+.overviewStatus.has-data .statusSummary {
+  pointer-events: auto;
+  opacity: 1;
+  filter: none;
+}
+.overviewStatus .cards {
+  height: calc(100% - 43px);
+  min-height: 104px;
+}
+.overviewStatus .card {
+  height: 100%;
+}
+@media (max-width: 1050px) {
+  .overviewGrid {
+    grid-template-columns: 1fr;
+  }
+  .overviewBox {
+    min-height: 0;
+  }
+}
+@media (max-width: 650px) {
+  .overviewGrid {
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .overviewBox {
+    padding: 13px;
+  }
+  .uploadBlock .upload {
+    align-items: stretch;
+  }
+}
+  /* V5: gecentreerde header, uploadbediening en compacte statuskaarten. */
+.brand-inner {
+  display: grid;
+  grid-template-columns: 210px 1fr 210px;
+  align-items: center;
+  width: 100%;
+}
+.brand-logo {
+  grid-column: 1;
+  justify-self: start;
+}
+.brand-copy {
+  grid-column: 2;
+  justify-self: center;
+  width: 100%;
+  text-align: center;
+}
+.brand-copy h1 {
+  margin: 0 !important;
+  text-align: center;
+}
+.brand-spacer {
+  grid-column: 3;
+  width: 210px;
+}
+#brandHeader.compact .brand-inner {
+  grid-template-columns: 132px 1fr 132px;
+}
+#brandHeader.compact .brand-spacer {
+  width: 132px;
+}
+.overviewControls,
+.overviewStatus,
+.overviewStatus .statusSummary {
+  text-align: center;
+}
+.overviewControls {
+  align-items: center;
+}
+.uploadBlock {
+  width: 100%;
+}
+.uploadBlock .upload {
+  justify-content: center;
+  align-items: flex-end;
+  gap: 28px;
+}
+.uploadBlock .upload > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.uploadBlock label,
+.uploadBlock #fileinfo,
+.uploadBlock #notice {
+  text-align: center;
+}
+.filePicker {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.filePickerButton {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 156px;
+  min-height: 36px;
+  padding: 8px 12px;
+  border: 1px solid var(--traxall-line);
+  border-radius: 7px;
+  color: var(--traxall-ink);
+  background: #fff;
+  cursor: pointer;
+  font-weight: 400 !important;
+}
+.filePickerButton:hover {
+  border-color: var(--traxall-orange);
+  background: #fff8e8;
+}
+.filePickerButton:focus-within {
+  outline: 2px solid #f59e0b55;
+  border-color: var(--traxall-orange);
+}
+#file {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.overviewControls .mainTabs {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.mainTabs button,
+.dupbar {
+  height: 38px !important;
+  min-height: 38px !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+.overviewStatus {
+  align-items: center;
+}
+.overviewStatus .statusSummary {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.overviewStatus .cards {
+  height: auto;
+  min-height: 88px;
+}
+.overviewStatus .card {
+  min-height: 88px;
+  height: 88px;
+  padding: 8px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.overviewStatus .card strong {
+  margin-bottom: 5px;
+  font-size: 24px;
+  line-height: 1;
+}
+.overviewStatus .card span {
+  font-size: 13px;
+}
+.overviewStatus .card small {
+  margin-top: 3px;
+  font-size: 10px;
+}
+.dupbar {
+  width: 100%;
+  margin-top: 0;
+  padding-left: 12px !important;
+  padding-right: 12px !important;
+  text-align: center;
+}
+@media (max-width: 1050px) {
+  .brand-inner,
+  #brandHeader.compact .brand-inner {
+    grid-template-columns: 150px 1fr 150px;
+  }
+  .brand-logo,
+  #brandHeader.compact .brand-logo {
+    width: 150px;
+  }
+  .brand-spacer,
+  #brandHeader.compact .brand-spacer {
+    width: 150px;
+  }
+}
+@media (max-width: 700px) {
+  .brand-inner,
+  #brandHeader.compact .brand-inner {
+    grid-template-columns: 105px 1fr 105px;
+    gap: 8px;
+  }
+  .brand-logo,
+  #brandHeader.compact .brand-logo {
+    width: 105px;
+  }
+  .brand-spacer,
+  #brandHeader.compact .brand-spacer {
+    width: 105px;
+  }
+  .uploadBlock .upload {
+    align-items: center;
+  }
+}
+@media (max-width: 480px) {
+  .brand-inner,
+  #brandHeader.compact .brand-inner {
+    grid-template-columns: 76px 1fr 76px;
+  }
+  .brand-logo,
+  #brandHeader.compact .brand-logo {
+    width: 76px;
+  }
+  .brand-spacer,
+  #brandHeader.compact .brand-spacer {
+    width: 76px;
+  }
+}
  </style>
  <div class="header-space">
   <header id="brandHeader">
    <div class="brand-inner">
+    <div class="brand-logo">
+     <img alt="TraXall" src="logo-traxall.png"/>
+    </div>
     <div class="brand-copy">
-     </small>
      <h1>
       Vlootanalyse
      </h1>
-     <p>
-      Contracten, kilometerprognoses en statuscontrole in één overzicht.
-     </p>
     </div>
-    <div class="brand-logo">
-     <img alt="TraXall" src="logo-traxall.png"/>
+    <div aria-hidden="true" class="brand-spacer">
     </div>
    </div>
   </header>
  </div>
  <main>
-  <section class="panel">
-   <div class="upload">
-    <div>
-     <label for="file">
-      Upload Full Fleetoverview
-     </label>
-     <br/>
-     <input accept=".xlsx" id="file" type="file"/>
+  <div class="overviewGrid">
+   <section class="overviewBox overviewControls">
+    <section class="uploadBlock">
+     <div class="upload">
+      <div>
+       <label for="file">
+        Upload Full Fleetoverview
+       </label>
+       <br/>
+       <div class="filePicker">
+        <label class="filePickerButton" for="file">
+         Bestand kiezen
+        </label>
+        <input accept=".xlsx" id="file" type="file"/>
+       </div>
+      </div>
+      <div>
+       <label for="reference">
+        Peildatum
+       </label>
+       <br/>
+       <input id="reference" type="date"/>
+      </div>
+     </div>
+     <div class="muted" id="fileinfo">
+      Kies je Excel-bestand (.xlsx) om te beginnen
+     </div>
+     <div id="notice" role="status">
+     </div>
+    </section>
+    <nav class="mainTabs">
+     <button class="primary" id="contractTab">
+      Contractcontrole
+     </button>
+     <button id="statusTab">
+      Statuscontrole
+     </button>
+    </nav>
+   </section>
+   <section class="overviewBox overviewStatus is-empty" id="overviewStatus">
+    <div class="statusPlaceholder" id="statusPlaceholder">
+     <strong>
+      Statusoverzicht
+     </strong>
+     <span>
+      Upload een Full Fleetoverview
+     </span>
     </div>
-    <div>
-     <label for="reference">
-      Peildatum
-     </label>
-     <br/>
-     <input id="reference" type="date"/>
+    <div class="statusSummary">
+     <div class="cards">
+      <button class="card green" data-view="active">
+       <strong id="active">
+        —
+       </strong>
+       <span>
+        Actieve kentekens
+       </span>
+       <small>
+        Unieke kentekens · status Actief
+       </small>
+      </button>
+      <button class="card orange" data-view="orange">
+       <strong id="orange">
+        —
+       </strong>
+       <span>
+        2 tot 5 dagen
+       </span>
+       <small>
+        2, 3 of 4 kalenderdagen in status
+       </small>
+      </button>
+      <button class="card red" data-view="red">
+       <strong id="red">
+        —
+       </strong>
+       <span>
+        Opvolging nodig
+       </span>
+       <small>
+        5+ dagen · selectie 3+ maanden
+       </small>
+      </button>
+     </div>
+     <button class="dupbar" id="duplicateBar">
+      Geen dubbele berijders
+     </button>
     </div>
-   </div>
-   <div class="muted" id="fileinfo">
-    Kies je Excel-bestand (.xlsx) om te beginnen.
-   </div>
-   <div id="notice" role="status">
-   </div>
-  </section>
-  <nav class="mainTabs">
-   <button class="primary" id="contractTab">
-    1. Contractcontrole
-   </button>
-   <button id="statusTab">
-    2. Statuscontrole
-   </button>
-  </nav>
-  <div class="statusSummary">
-   <div class="cards">
-    <button class="card green" data-view="active">
-     <strong id="active">
-      —
-     </strong>
-     <span>
-      Actieve kentekens
-     </span>
-     <small>
-      Unieke kentekens · status Actief
-     </small>
-    </button>
-    <button class="card orange" data-view="orange">
-     <strong id="orange">
-      —
-     </strong>
-     <span>
-      2 tot 5 dagen
-     </span>
-     <small>
-      2, 3 of 4 kalenderdagen in status
-     </small>
-    </button>
-    <button class="card red" data-view="red">
-     <strong id="red">
-      —
-     </strong>
-     <span>
-      Opvolging nodig
-     </span>
-     <small>
-      5+ dagen · selectie 3+ maanden
-     </small>
-    </button>
-   </div>
-   <button class="dupbar" id="duplicateBar">
-    Geen dubbele berijders
-   </button>
+   </section>
   </div>
   <section class="panel" id="contractPanel">
    <h2>
@@ -1274,7 +1612,7 @@ const missing=required.filter(n=>!positions.has(norm(n))),duplicates=used.filter
 if(missing.length||duplicates.length)throw Error('Werkblad '+sheet.getAttribute('name')+': '+[missing.length?'ontbrekende kolomnamen: '+missing.join(', '):'',duplicates.length?'dubbele kolomnamen: '+duplicates.join(', '):''].filter(Boolean).join('; ')+'.');
 return {sheet:sheet.getAttribute('name'),rows:rows.slice(h+1).filter(r=>r.values.some(v=>v!==''&&v!=null)).map(({row,values:v})=>{const get=name=>v[positions.get(norm(name))?.[0]];const km=get('Vehicle Mileage');return {row,plate:str(get('License Plate')),order:str(get('Order Nr')),name:[get('Driver First Name'),get('Driver Name')].filter(Boolean).join(' '),id:str(get('Driver ID')),client:str(get('client')),entity:str(get('Entiteit')),car:[get('Brand'),get('Model')].filter(Boolean).join(' '),supplier:str(get('Supplier')),financingMethod:str(get('Financing Method')),status:str(get('Status')),key:norm(get('Status')),rawdate:get('Status since'),date:dateValue(get('Status since'),epoch),contractStart:dateValue(get('Start Date'),epoch),months:Number(get('Contract Duration')),annual:Number(get('Contract Mileage')),lastDate:dateValue(get('Date of Last Mileage'),epoch),km:km===''||km==null?null:Number(km),sourceEnd:dateValue(get('End Date'),epoch)}})}}throw Error('Full Fleetoverview-format niet herkend. Verwacht een kopregel met onder andere Status, License Plate en Driver ID.');}
 
-$('file').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;$('notice').className='';$('notice').textContent='Bestand wordt ingelezen…';$('file').disabled=true;try{if(!/\.xlsx$/i.test(f.name))throw Error('Selecteer een .xlsx-bestand.');const result=await readXlsx(await f.arrayBuffer());records=result.rows;filename=f.name;sheetname=result.sheet;view='attention';$('search').value='';setOptions('status',[['*','Alle statussen'],...Array.from(new Map(records.filter(r=>r.key!=='inactief'&&!ignored(r.key)).map(r=>[r.key,r.status||'Status ontbreekt']))).sort((a,b)=>a[1].localeCompare(b[1]))],['*']);$('fileinfo').textContent=filename+' · Werkblad '+sheetname;$('notice').textContent='Bestand ingelezen. De analyse is bijgewerkt.';recalc();await refreshRdw()}catch(err){$('notice').className='error';$('notice').textContent='Inlezen mislukt: '+err.message+(filename?' De vorige analyse blijft zichtbaar.':'')}finally{$('file').disabled=false;$('file').value=''}});
+$('file').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;$('notice').className='';$('notice').textContent='Bestand wordt ingelezen…';$('file').disabled=true;try{if(!/\.xlsx$/i.test(f.name))throw Error('Selecteer een .xlsx-bestand.');const result=await readXlsx(await f.arrayBuffer());records=result.rows;filename=f.name;sheetname=result.sheet;view='attention';$('search').value='';setOptions('status',[['*','Alle statussen'],...Array.from(new Map(records.filter(r=>r.key!=='inactief'&&!ignored(r.key)).map(r=>[r.key,r.status||'Status ontbreekt']))).sort((a,b)=>a[1].localeCompare(b[1]))],['*']);$('fileinfo').textContent=filename+' · Werkblad '+sheetname;$('notice').textContent='Bestand ingelezen. De analyse is bijgewerkt.';$('overviewStatus').classList.remove('is-empty');$('overviewStatus').classList.add('has-data');recalc();await refreshRdw()}catch(err){$('notice').className='error';$('notice').textContent='Inlezen mislukt: '+err.message+(filename?' De vorige analyse blijft zichtbaar.':'')}finally{$('file').disabled=false;$('file').value=''}});
 document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>{view=b.dataset.view;resetStatusSelection();render()});$('reference').onchange=recalc;$('search').oninput=render;
 function ignored(key){return ['wacht op afleverdocumenten','annulering'].includes(key.replace(/^order\s*:\s*/,''))}
 function selection(key){return /^vehicle selection in (process|progress)$/.test(key)}
