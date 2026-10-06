@@ -1302,10 +1302,50 @@ footer {
     gap: 16px;
   }
 }
-  /* V7: Excel-bestand kiezen of naar de uploadknop slepen. */
+  /* Compacte drag & drop uploadtegel. */
 .filePicker {
   position: relative;
-  border-radius: 7px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 240px;
+  height: 112px;
+  margin: 0 auto;
+  border-radius: 10px;
+}
+.filePickerButton {
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  padding: 12px 16px;
+  border: 2px dashed var(--traxall-line);
+  border-radius: 10px;
+  color: var(--traxall-blue);
+  background: var(--traxall-soft);
+  cursor: pointer;
+  font-weight: 700 !important;
+  text-align: center;
+  transition: border-color .15s ease, background .15s ease, box-shadow .15s ease;
+}
+.filePickerButton::after {
+  content: "Nog geen bestand geselecteerd";
+  color: var(--traxall-blue);
+  font-size: 12px;
+  font-weight: 600;
+}
+.filePicker:hover .filePickerButton,
+.filePicker:focus-within .filePickerButton {
+  border-color: var(--traxall-orange);
+  background: #fff8e8;
+}
+.filePicker:focus-within .filePickerButton {
+  outline: 2px solid #f59e0b55;
+  outline-offset: 2px;
 }
 .filePicker.drag-over .filePickerButton {
   border-color: var(--traxall-orange);
@@ -1314,41 +1354,228 @@ footer {
 }
 .filePicker.drag-over .filePickerButton::after {
   content: "Loslaten om te uploaden";
-  position: absolute;
-  left: 50%;
-  bottom: -23px;
-  transform: translateX(-50%);
-  width: max-content;
   color: var(--traxall-orange);
-  font-size: 11px;
-  font-weight: 700;
 }
-  /* V8: robuuste sleepzone over het volledige uploadgedeelte. */
+.filePicker.has-file .filePickerButton::after {
+  content: attr(data-file-name);
+  display: block;
+  max-width: 205px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+@media (max-width: 650px) {
+  .filePicker {
+    max-width: 220px;
+    height: 104px;
+  }
+}
+  /* Uploadindeling V10: bovenzijde uitlijnen en informatietekst onder peildatum. */
+.uploadBlock .upload {
+  align-items: flex-start;
+}
+.uploadBlock .upload > div {
+  justify-content: flex-start;
+}
+.referenceBlock {
+  align-self: flex-start;
+}
+.referenceBlock #fileinfo {
+  max-width: 230px;
+  min-height: 32px;
+  margin-top: 12px;
+  line-height: 1.35;
+  text-align: center;
+}
+.filePicker {
+  height: 130px;
+}
+.filePickerButton::after {
+  content: "Selecteer bestand of sleep het naar dit veld";
+  max-width: 200px;
+  line-height: 1.35;
+}
+@media (max-width: 650px) {
+  .filePicker {
+    height: 122px;
+  }
+  .referenceBlock #fileinfo {
+    max-width: 220px;
+  }
+}
+  /* Uploadindeling V11: upload links, peildatum rechts, compact overzicht. */
+.overviewGrid {
+  grid-template-columns: minmax(430px, 1fr) minmax(600px, 1.5fr);
+  align-items: stretch;
+}
+.overviewBox {
+  min-height: 154px;
+  padding-top: 13px;
+  padding-bottom: 13px;
+}
+.overviewControls {
+  gap: 10px;
+}
 .uploadBlock {
-  position: relative;
-  border: 2px dashed transparent;
-  border-radius: 9px;
-  padding: 6px 10px;
-  transition: border-color .15s ease, background .15s ease, box-shadow .15s ease;
+  padding-top: 0;
+  padding-bottom: 0;
 }
-.uploadBlock.drag-over {
-  border-color: var(--traxall-orange);
-  background: #fff8e8;
-  box-shadow: 0 0 0 3px rgba(245, 158, 11, .18);
+.uploadBlock .upload {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 24px;
 }
-.uploadBlock.drag-over::after {
-  content: "Laat het Excel-bestand hier los";
-  position: absolute;
-  inset: 0;
-  z-index: 5;
+.uploadBlock .upload > div {
+  flex: 0 0 auto;
+  min-width: 0;
+  justify-content: flex-start;
+}
+.filePicker {
+  width: 218px;
+  max-width: 218px;
+  height: 104px;
+}
+.filePickerButton {
+  padding: 10px 14px;
+}
+.filePickerButton::after {
+  content: "Selecteer bestand of sleep het naar dit veld";
+  max-width: 180px;
+  font-size: 12px;
+  line-height: 1.35;
+}
+.referenceBlock {
+  width: 170px;
+  align-self: flex-start;
+}
+.referenceBlock #reference {
+  width: 100%;
+}
+.referenceBlock #fileinfo {
+  width: 100%;
+  max-width: 170px;
+  min-height: 30px;
+  margin-top: 10px;
+  font-size: 12px;
+  line-height: 1.3;
+}
+.overviewControls .mainTabs {
+  margin-top: 0;
+}
+.overviewStatus .cards {
+  min-height: 76px;
+}
+.overviewStatus .card {
+  min-height: 76px;
+  height: 76px;
+  padding: 7px 10px;
+}
+.overviewStatus .card strong {
+  margin-bottom: 3px;
+  font-size: 22px;
+}
+.overviewStatus .card span {
+  font-size: 12px;
+}
+.overviewStatus .card small {
+  margin-top: 2px;
+  font-size: 9px;
+}
+@media (max-width: 1050px) {
+  .overviewGrid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 520px) {
+  .uploadBlock .upload {
+    flex-flow: column nowrap;
+    align-items: center;
+  }
+  .referenceBlock {
+    width: 218px;
+  }
+  .referenceBlock #fileinfo {
+    max-width: 218px;
+  }
+}
+
+/* V12 compactere resultaten */
+#count,
+#contractCount {display:none !important;}
+#statusPanel .tablewrap,
+#contractPanel .tablewrap {margin-top:0 !important;}
+.settings {padding:10px 12px !important;}
+.settings label {margin-bottom:0 !important;}
+
+/* V13: vaste driedelige bedieningsrij en Excel-exportopmaak. */
+#contractPanel > .toolbar:has(#contractSearch),
+#statusPanel > .toolbar:has(#search) {
+  display: grid;
+  grid-template-columns: minmax(240px, 1.45fr) minmax(230px, .9fr) auto;
+  gap: 10px;
+  align-items: stretch;
+  width: 100%;
+  margin-bottom: 14px;
+}
+#contractPanel > .toolbar:has(#contractSearch) > *,
+#statusPanel > .toolbar:has(#search) > * {
+  min-width: 0;
+  width: 100%;
+  margin: 0;
+}
+#contractSearch,
+#search {
+  min-width: 0;
+}
+#contractFilter,
+#status {
+  max-width: none;
+}
+#contractFilter > summary,
+#status > summary {
+  height: 100%;
+  min-height: 36px;
   display: flex;
   align-items: center;
+}
+.excelExportButton {
+  display: inline-flex;
+  align-items: center;
   justify-content: center;
-  border-radius: 7px;
-  color: var(--traxall-blue);
-  background: rgba(255, 248, 232, .96);
-  font-weight: 700;
-  pointer-events: none;
+  gap: 8px;
+  width: auto !important;
+  white-space: nowrap;
+  background: var(--traxall-green) !important;
+}
+.excelExportButton:hover:not(:disabled) {
+  background: #116b4a !important;
+}
+.excelExportButton:disabled {
+  color: #fff;
+  background: #c7cbd3 !important;
+  cursor: not-allowed;
+}
+.excelExportIcon {
+  display: inline-block;
+  width: 19px;
+  height: 19px;
+  flex: 0 0 19px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='3' fill='%23217346'/%3E%3Cpath fill='white' d='M5 5h7v14H5zm8 2h6v2h-6zm0 4h6v2h-6zm0 4h6v2h-6zM7 8l1.4 2.5L9.8 8h1.7l-2.2 4 2.3 4H9.9l-1.5-2.6L6.9 16H5.2l2.3-4-2.2-4z'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+.excelExportButton:disabled .excelExportIcon {
+  filter: grayscale(1);
+  opacity: .72;
+}
+@media (max-width: 760px) {
+  #contractPanel > .toolbar:has(#contractSearch),
+  #statusPanel > .toolbar:has(#search) {
+    grid-template-columns: 1fr;
+  }
+  .excelExportButton {
+    width: 100% !important;
+  }
 }
  </style>
  <div class="header-space">
@@ -1377,23 +1604,22 @@ footer {
         Upload Full Fleetoverview
        </label>
        <br/>
-       <div class="filePicker">
-        <label class="filePickerButton" for="file">
-         Bestand kiezen
+       <div class="filePicker" id="filePicker">
+        <label aria-label="Selecteer bestand of sleep het naar dit veld" class="filePickerButton" for="file">
         </label>
         <input accept=".xlsx" id="file" type="file"/>
        </div>
       </div>
-      <div>
+      <div class="referenceBlock">
        <label for="reference">
         Peildatum
        </label>
        <br/>
        <input id="reference" type="date"/>
+       <div class="muted" id="fileinfo">
+        Kies je Excel-bestand (.xlsx) om te beginnen
+       </div>
       </div>
-     </div>
-     <div class="muted" id="fileinfo">
-      Kies je Excel-bestand (.xlsx) om te beginnen
      </div>
      <div id="notice" role="status">
      </div>
@@ -1467,19 +1693,16 @@ footer {
      Maximale kilometerstand
      <br/>
      <input id="maxKm" min="10000" step="10000" type="number" value="180000"/>
-     km
     </label>
     <label>
-     Toegestane afwijking
+     Toegestane afwijking (%)
      <br/>
      <input id="tolerance" max="100" min="0" step="5" type="number" value="15"/>
-     %
     </label>
     <label>
-     Contracten jonger dan … maanden negeren
+     Contracten < ... maanden negeren
      <br/>
      <input id="minAge" min="0" step="3" type="number" value="12"/>
-     maanden
     </label>
    </div>
    <div class="contractSummary" id="contractSummary">
@@ -1493,8 +1716,9 @@ footer {
      <div class="multi-options">
      </div>
     </details>
-    <button class="primary" disabled="" id="contractExport">
-     Excel export (.xlsx)
+    <button class="primary excelExportButton" disabled="" id="contractExport">
+     <span aria-hidden="true" class="excelExportIcon"></span>
+     <span>Excel export (.xlsx)</span>
     </button>
    </div>
    <p class="muted" id="contractCount">
@@ -1567,7 +1791,7 @@ footer {
   </section>
   <section class="panel" hidden="" id="statusPanel">
    <h2 id="heading">
-    Opvolgen
+    Statuscontrole
    </h2>
    <div class="tabs">
     <button class="selected" data-view="attention">
@@ -1595,8 +1819,9 @@ footer {
      <div class="multi-options">
      </div>
     </details>
-    <button class="primary" disabled="" id="export">
-     Excel export (.xlsx)
+    <button class="primary excelExportButton" disabled="" id="export">
+     <span aria-hidden="true" class="excelExportIcon"></span>
+     <span>Excel export (.xlsx)</span>
     </button>
    </div>
    <p class="muted" id="count">
@@ -1690,40 +1915,8 @@ function analyze(rows,ref){const counts=new Map();rows.forEach(r=>{if(r.id&&['ac
 function recalc(){let ref=dateValue($('reference').value);if(ref===null)return;analyzed=analyze(records,ref);$('active').textContent=new Set(analyzed.filter(r=>r.key==='actief'&&r.plate).map(r=>norm(r.plate).replace(/[-\s]/g,''))).size;$('orange').textContent=analyzed.filter(r=>r.band==='orange').length;$('red').textContent=analyzed.filter(r=>r.band==='red').length;$('dups').textContent='('+new Set(analyzed.filter(r=>r.duplicate).map(r=>r.id)).size+' ID’s)';$('quality').textContent='('+analyzed.filter(r=>r.issues.length).length+')';render();recalcContracts();const ids=new Set(analyzed.filter(r=>r.duplicate).map(r=>r.id));$('duplicateBar').textContent=ids.size?ids.size+' dubbele berijder-ID · '+analyzed.filter(r=>r.duplicate).length+' betrokken regels — bekijken':'Geen dubbele berijder-ID’s in Actief / Inleverproces bezig';}
 function signals(r){return [r.band==='red'?(selection(r.key)?'3 maanden verstreken':'5+ dagen'):r.band==='orange'?'2–4 dagen':'',r.duplicate?'Dubbele berijder-ID':'',...r.issues].filter(Boolean)}
 function dateLabel(r){return r.date===null?str(r.rawdate)||'—':new Date(r.date*DAY).toLocaleDateString('nl-NL',{timeZone:'UTC'})}
-function render(){const q=norm($('search').value),status=selectedValues('status');visible=analyzed.filter(r=>(view==='active'?r.key==='actief':view==='duplicates'?r.duplicate:view==='quality'?r.issues.length:view==='attention'?r.band==='red'||r.duplicate:r.band===view)&&(status.includes('*')||status.includes(r.key))&&(!q||norm([r.plate,r.order,r.name,r.id,r.client,r.entity,r.car,r.supplier,r.status].join(' ')).includes(q))).sort((a,b)=>view==='duplicates'?a.id.localeCompare(b.id)||(b.age??-1)-(a.age??-1):(b.age??-1)-(a.age??-1));$('heading').textContent=({attention:'Opvolgen',active:'Actieve kentekens',orange:'Status 2 tot 5 dagen',red:'Statussen die opvolging vragen',duplicates:'Dubbele berijders',quality:'Datacontrole'})[view];
-const fileDropZone=$('fileDropZone');
-if(fileDropZone){
-  let dragDepth=0;
-  const prevent=e=>{e.preventDefault();e.stopPropagation()};
-  document.addEventListener('dragover',e=>e.preventDefault());
-  document.addEventListener('drop',e=>{
-    if(!fileDropZone.contains(e.target))e.preventDefault();
-  });
-  fileDropZone.addEventListener('dragenter',e=>{
-    prevent(e);dragDepth++;fileDropZone.classList.add('drag-over');
-  });
-  fileDropZone.addEventListener('dragover',e=>{
-    prevent(e);if(e.dataTransfer)e.dataTransfer.dropEffect='copy';fileDropZone.classList.add('drag-over');
-  });
-  fileDropZone.addEventListener('dragleave',e=>{
-    prevent(e);dragDepth=Math.max(0,dragDepth-1);if(dragDepth===0)fileDropZone.classList.remove('drag-over');
-  });
-  fileDropZone.addEventListener('drop',e=>{
-    prevent(e);dragDepth=0;fileDropZone.classList.remove('drag-over');
-    const files=Array.from(e.dataTransfer?.files||[]);
-    const excel=files.find(f=>/\.xlsx$/i.test(f.name));
-    if(!excel){
-      $('notice').className='error';
-      $('notice').textContent='Sleep een geldig .xlsx-bestand naar het uploadvak.';
-      return;
-    }
-    processFleetFile(excel);
-  });
-  fileDropZone.addEventListener('keydown',e=>{
-    if(e.key==='Enter'||e.key===' '){e.preventDefault();$('file').click()}
-  });
-}
-document.querySelectorAll('[data-view]').forEach(b=>{b.classList.toggle('selected',b.dataset.view===view);b.setAttribute('aria-pressed',b.dataset.view===view)});$('count').textContent=filename?visible.length+' regels in deze selectie · '+records.length+' regels ingelezen · '+records.filter(r=>r.key==='inactief'||ignored(r.key)).length+' regels genegeerd':'';$('export').disabled=!visible.length;$('body').innerHTML=visible.length?visible.map(r=>`<tr><td>${esc(r.plate||'Geen kenteken')}<div class="muted">${esc(r.order)}</div></td><td>${esc(r.name)||'—'}</td><td>${esc(r.id)||'—'}</td><td>${esc(r.client)}<div class="muted">${esc(r.entity)}</div></td><td>${esc(r.car)}<div class="muted">${esc(r.supplier)}</div></td><td>${esc(r.status)||'—'}</td><td>${esc(dateLabel(r))}</td><td>${r.age??'—'}</td><td>${signals(r).map(s=>`<span class="badge ${s==='Dubbele berijder-ID'?'duplicate':(s==='5+ dagen'||s==='3 maanden verstreken')?'red':s==='2–4 dagen'?'orange':'neutral'}">${esc(s)}</span> `).join('')||'—'}</td><td>${r.row}</td></tr>`).join(''):'<tr><td class="empty" colspan="10">'+(filename?'Geen regels voor deze selectie.':'Upload je Fleetoverview om de analyse te starten.')+'</td></tr>'}
+function render(){const q=norm($('search').value),status=selectedValues('status');visible=analyzed.filter(r=>(view==='active'?r.key==='actief':view==='duplicates'?r.duplicate:view==='quality'?r.issues.length:view==='attention'?r.band==='red'||r.duplicate:r.band===view)&&(status.includes('*')||status.includes(r.key))&&(!q||norm([r.plate,r.order,r.name,r.id,r.client,r.entity,r.car,r.supplier,r.status].join(' ')).includes(q))).sort((a,b)=>view==='duplicates'?a.id.localeCompare(b.id)||(b.age??-1)-(a.age??-1):(b.age??-1)-(a.age??-1));$('heading').textContent='Statuscontrole';
+document.querySelectorAll('[data-view]').forEach(b=>{b.classList.toggle('selected',b.dataset.view===view);b.setAttribute('aria-pressed',b.dataset.view===view)});$('count').textContent=filename?visible.length+' regels in deze selectie · '+records.length+' regels ingelezen · '+records.filter(r=>r.key==='inactief'||ignored(r.key)).length+' regels genegeerd':'';$('export').disabled=!filename;$('body').innerHTML=visible.length?visible.map(r=>`<tr><td>${esc(r.plate||'Geen kenteken')}<div class="muted">${esc(r.order)}</div></td><td>${esc(r.name)||'—'}</td><td>${esc(r.id)||'—'}</td><td>${esc(r.client)}<div class="muted">${esc(r.entity)}</div></td><td>${esc(r.car)}<div class="muted">${esc(r.supplier)}</div></td><td>${esc(r.status)||'—'}</td><td>${esc(dateLabel(r))}</td><td>${r.age??'—'}</td><td>${signals(r).map(s=>`<span class="badge ${s==='Dubbele berijder-ID'?'duplicate':(s==='5+ dagen'||s==='3 maanden verstreken')?'red':s==='2–4 dagen'?'orange':'neutral'}">${esc(s)}</span> `).join('')||'—'}</td><td>${r.row}</td></tr>`).join(''):'<tr><td class="empty" colspan="10">'+(filename?'Geen regels voor deze selectie.':'Upload je Fleetoverview om de analyse te starten.')+'</td></tr>'}
 // Offline XLSX reader: ZIP central directory + SpreadsheetML, no external dependencies.
 async function unzip(buffer){const data=new Uint8Array(buffer),dv=new DataView(buffer);let end=-1;for(let i=data.length-22;i>=Math.max(0,data.length-65557);i--)if(dv.getUint32(i,true)===0x06054b50){end=i;break}if(end<0)throw Error('Geen geldig XLSX-bestand.');let p=dv.getUint32(end+16,true),n=dv.getUint16(end+10,true);const files=new Map(),dec=new TextDecoder();for(let j=0;j<n;j++){if(dv.getUint32(p,true)!==0x02014b50)throw Error('Beschadigd Excel-bestand.');let method=dv.getUint16(p+10,true),size=dv.getUint32(p+20,true),nameLen=dv.getUint16(p+28,true),extra=dv.getUint16(p+30,true),comment=dv.getUint16(p+32,true),offset=dv.getUint32(p+42,true),name=dec.decode(data.slice(p+46,p+46+nameLen));files.set(name,{method,size,offset});p+=46+nameLen+extra+comment}return async name=>{const e=files.get(name);if(!e)return null;let start=e.offset+30+dv.getUint16(e.offset+26,true)+dv.getUint16(e.offset+28,true),bytes=data.slice(start,start+e.size);if(e.method===8){bytes=new Uint8Array(await new Response(new Blob([bytes]).stream().pipeThrough(new DecompressionStream('deflate-raw'))).arrayBuffer())}else if(e.method!==0)throw Error('Deze Excel-compressie wordt niet ondersteund.');return dec.decode(bytes)}}
 function xml(s){const d=new DOMParser().parseFromString(s,'application/xml');if(d.getElementsByTagName('parsererror').length)throw Error('Ongeldige Excel-inhoud.');return d}const tags=(el,t)=>Array.from(el.getElementsByTagNameNS('*',t));
@@ -1805,7 +1998,7 @@ function recalcContracts(){const max=Number($('maxKm').value),tol=Number($('tole
 function severity(v){const a=Math.abs(v??0);return a>50?'darkred':a>=25?'lightred':a>=15?'orange':'neutral'}
 function direction(v){return v==null?'':v>0?'Meer kilometers':v<0?'Minder kilometers':'Gelijk aan contract'}
 function advice(r){return r.adviceAnnual==null?'Niet berekenbaar':num(r.adviceAnnual)+'km/'+r.adviceMonths+'mnd'}
-function renderContracts(){const q=norm($('contractSearch').value),f=selectedValues('contractFilter');contractVisible=contracts.filter(r=>(f.includes('all')||(f.includes('quality')&&r.errors.length)||(f.includes('alerts')&&r.alerts.length&&r.vehicleAge!=null))&&(!q||norm([r.plate,r.name,r.id,r.client,r.entity,r.supplier].join(' ')).includes(q))).sort((a,b)=>(b.deviation==null?-1:Math.abs(b.deviation))-(a.deviation==null?-1:Math.abs(a.deviation)));$('contractCount').textContent=contractVisible.length+' contracten in selectie';$('contractExport').disabled=!contractVisible.length;$('contractBody').innerHTML=contractVisible.map(r=>`<tr><td>${esc(r.plate)||'Geen kenteken'}<div class="muted">${esc(r.name)} · ${esc(r.id)}<br>${esc(r.client)}</div></td><td>${r.vehicleAge==null?'Onbekend':r.vehicleAge+' mnd'}<div class="muted">Eerste toelating: ${df(r.firstRegistration)}</div></td><td>${num(r.km)} km<div class="muted">${df(r.lastDate)} · ${r.readingAge??'—'} dagen oud</div></td><td>${num(r.annual)}km / ${r.months||'—'}mnd</td><td>${num(r.annualEstimate)} km</td><td><span class="badge ${severity(r.deviation)}">${r.deviation==null?'—':Math.abs(r.deviation).toLocaleString('nl-NL',{maximumFractionDigits:1})+'%'}</span><div class="muted">${direction(r.deviation)}</div></td><td>${num(r.endKm)} km</td><td>${df(r.limitDate)}</td><td>${r.alerts.length&&r.adviceAnnual!=null?'<strong class="advice">Advies: '+advice(r)+'</strong>':''}${[...r.alerts.map(a=>'<span class="badge '+(/kilometers dan contract/.test(a)?severity(r.deviation):'neutral')+'">'+esc(a)+'</span>'),...r.errors.map(a=>'<span class="badge orange">'+esc(a)+'</span>')].join(' ')||'<span class="badge green">Binnen marges</span>'}</td></tr>`).join('')||'<tr><td class="empty" colspan="9">Geen contracten voor deze selectie.</td></tr>'}
+function renderContracts(){const q=norm($('contractSearch').value),f=selectedValues('contractFilter');contractVisible=contracts.filter(r=>(f.includes('all')||(f.includes('quality')&&r.errors.length)||(f.includes('alerts')&&r.alerts.length&&r.vehicleAge!=null))&&(!q||norm([r.plate,r.name,r.id,r.client,r.entity,r.supplier].join(' ')).includes(q))).sort((a,b)=>(b.deviation==null?-1:Math.abs(b.deviation))-(a.deviation==null?-1:Math.abs(a.deviation)));$('contractCount').textContent=contractVisible.length+' contracten in selectie';$('contractExport').disabled=!filename;$('contractBody').innerHTML=contractVisible.map(r=>`<tr><td>${esc(r.plate)||'Geen kenteken'}<div class="muted">${esc(r.name)} · ${esc(r.id)}<br>${esc(r.client)}</div></td><td>${r.vehicleAge==null?'Onbekend':r.vehicleAge+' mnd'}<div class="muted">Eerste toelating: ${df(r.firstRegistration)}</div></td><td>${num(r.km)} km<div class="muted">${df(r.lastDate)} · ${r.readingAge??'—'} dagen oud</div></td><td>${num(r.annual)}km / ${r.months||'—'}mnd</td><td>${num(r.annualEstimate)} km</td><td><span class="badge ${severity(r.deviation)}">${r.deviation==null?'—':Math.abs(r.deviation).toLocaleString('nl-NL',{maximumFractionDigits:1})+'%'}</span><div class="muted">${direction(r.deviation)}</div></td><td>${num(r.endKm)} km</td><td>${df(r.limitDate)}</td><td>${r.alerts.length&&r.adviceAnnual!=null?'<strong class="advice">Advies: '+advice(r)+'</strong>':''}${[...r.alerts.map(a=>'<span class="badge '+(/kilometers dan contract/.test(a)?severity(r.deviation):'neutral')+'">'+esc(a)+'</span>'),...r.errors.map(a=>'<span class="badge orange">'+esc(a)+'</span>')].join(' ')||'<span class="badge green">Binnen marges</span>'}</td></tr>`).join('')||'<tr><td class="empty" colspan="9">Geen contracten voor deze selectie.</td></tr>'}
 function tab(which){const c=which==='contract';$('contractPanel').hidden=!c;$('statusPanel').hidden=c;$('statusRules').hidden=c;$('contractTab').classList.toggle('primary',c);$('statusTab').classList.toggle('primary',!c);$('contractTab').setAttribute('aria-pressed',c);$('statusTab').setAttribute('aria-pressed',!c)}
 $('contractTab').onclick=()=>tab('contract');$('statusTab').onclick=()=>tab('status');$('duplicateBar').onclick=()=>{tab('status');view='duplicates';resetStatusSelection();$('search').value='';render()};document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>tab('status')));$('maxKm').oninput=recalcContracts;$('tolerance').oninput=recalcContracts;$('minAge').oninput=recalcContracts;$('contractSearch').oninput=renderContracts;
 // Native XLSX export: typed cells, autofilter and frozen header, packaged as an uncompressed ZIP.
@@ -1823,6 +2016,41 @@ setOptions('contractFilter',[['alerts','Afwijkingen en looptijdmeldingen'],['all
 setOptions('status',[['*','Alle statussen']],['*']);
 for(const id of ['contractFilter','status']){$(id).addEventListener('change',e=>{if(e.target.type!=='checkbox')return;if(id==='status'){const all=$(id).querySelector('input[value="*"]');if(e.target.value==='*'&&e.target.checked)$(id).querySelectorAll('input').forEach(el=>el.checked=el===all);else if(e.target.value!=='*'&&e.target.checked)all.checked=false;}updateMultiLabel(id);(id==='status'?render:renderContracts)()});$(id).addEventListener('keydown',e=>{if(e.key==='Escape'){$(id).open=false;$(id).querySelector('summary').focus()}})}
 document.addEventListener('click',e=>{for(const id of ['contractFilter','status'])if(!$(id).contains(e.target))$(id).open=false});
+
+const filePicker=$('filePicker');
+const fileInput=$('file');
+if(filePicker&&fileInput){
+  let dragDepth=0;
+  const prevent=e=>{e.preventDefault();e.stopPropagation()};
+  const clearDrag=()=>{dragDepth=0;filePicker.classList.remove('drag-over')};
+  document.addEventListener('dragover',e=>e.preventDefault());
+  document.addEventListener('drop',e=>{
+    if(!filePicker.contains(e.target))e.preventDefault();
+  });
+  filePicker.addEventListener('dragenter',e=>{
+    prevent(e);dragDepth++;filePicker.classList.add('drag-over');
+  });
+  filePicker.addEventListener('dragover',e=>{
+    prevent(e);if(e.dataTransfer)e.dataTransfer.dropEffect='copy';filePicker.classList.add('drag-over');
+  });
+  filePicker.addEventListener('dragleave',e=>{
+    prevent(e);dragDepth=Math.max(0,dragDepth-1);if(dragDepth===0)filePicker.classList.remove('drag-over');
+  });
+  filePicker.addEventListener('drop',e=>{
+    prevent(e);clearDrag();
+    const files=Array.from(e.dataTransfer?.files||[]);
+    const excel=files.find(f=>/\.xlsx$/i.test(f.name));
+    if(!excel){
+      $('notice').className='error';
+      $('notice').textContent='Sleep een geldig .xlsx-bestand naar het uploadvak.';
+      return;
+    }
+    filePicker.classList.add('has-file');
+    filePicker.querySelector('.filePickerButton').dataset.fileName=excel.name;
+    processFleetFile(excel);
+  });
+  window.addEventListener('dragend',clearDrag);
+}
 
 tab('contract');
 
