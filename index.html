@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+
 <html lang="nl">
- <meta charset="utf-8"/>
- <meta content="width=device-width,initial-scale=1" name="viewport"/>
- <title>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>
   Vloot Analyse Intern
  </title>
- <style>
+<style>
   * {
   box-sizing:border-box
 }
@@ -1580,341 +1581,341 @@ footer {
  
 .tools-back-link{justify-self:end;color:#213153;text-decoration:none;font-size:14px;font-weight:700;white-space:nowrap}.tools-back-link:hover{text-decoration:underline;color:#18243d}.tools-back-link:focus-visible{outline:2px solid #f59e0b;outline-offset:4px;border-radius:3px}
 @media(max-width:650px){.tools-back-link{justify-self:center;white-space:normal;text-align:center}}
-</style>
- <div class="header-space">
-  <header id="brandHeader">
-   <div class="brand-inner">
-    <div class="brand-logo">
-     <img alt="TraXall" src="logo-traxall.png"/>
-    </div>
-    <div class="brand-copy">
-     <h1>
+#expiryTab{color:#fff;background:#7b8494}#expiryTab.primary,#expiryTab:hover{background:#606a7a}.overviewStatus{display:grid;grid-template-columns:minmax(0,1fr)205px;gap:16px}.overviewStatus .statusSummary{grid-column:1;min-width:0}.overviewStatus .statusPlaceholder{right:221px}.rdwRetryBox{grid-column:2;display:flex;flex-direction:column;align-items:center;gap:14px;padding:16px 12px;text-align:center;background:#fff;border:1px solid var(--traxall-line);border-radius:8px}.rdwRetryTitle{min-height:38px;color:var(--traxall-blue);font-size:13px;font-weight:700;line-height:1.35}#rdwRetry{display:flex;align-items:center;justify-content:center;width:150px;height:86px;padding:8px;border:2px solid var(--traxall-line);border-radius:10px;background:#fff;cursor:pointer}#rdwRetry:hover:not(:disabled){border-color:var(--traxall-orange);box-shadow:0 4px 12px #21315333}#rdwRetry .rdw-logo{display:block;max-width:126px;max-height:62px;object-fit:contain}#rdwRetry .rdw-wheel{display:none;width:106px;height:82px;object-fit:contain}#rdwRetry.rdw-loading .rdw-logo{display:none}#rdwRetry.rdw-loading .rdw-wheel{display:block}.expiry-alert{margin-bottom:18px;overflow:hidden;border:2px solid #b42318;border-radius:10px;background:#fff0ee}.expiry-alert-head{padding:11px;color:#fff;background:#b42318;font-weight:700;text-align:center}.expiry-alert-copy{padding:12px;color:#84291f;font-weight:700;text-align:center}#expiryPanel>h2{text-align:center}@media(max-width:1050px){.overviewStatus{grid-template-columns:1fr}.overviewStatus .statusSummary,.rdwRetryBox{grid-column:1}.overviewStatus .statusPlaceholder{right:16px;bottom:154px}}</style>
+<div class="header-space">
+<header id="brandHeader">
+<div class="brand-inner">
+<div class="brand-logo">
+<img alt="TraXall" src="logo-traxall.png"/>
+</div>
+<div class="brand-copy">
+<h1>
       Vloot Analyse Intern
      </h1>
-    </div>
-    <a class="tools-back-link" href="https://traxallnetherlands.github.io/traxalltools/">&lt; Terug naar TraXall Tools</a>
-   </div>
-  </header>
- </div>
- <main>
-  <div class="overviewGrid">
-   <section class="overviewBox overviewControls">
-    <section aria-label="Kies of sleep een Full Fleetoverview Excel-bestand hierheen" class="uploadBlock" id="fileDropZone" role="button" tabindex="0">
-     <div class="upload">
-      <div>
-       <label for="file">
+</div>
+<a class="tools-back-link" href="https://traxallnetherlands.github.io/traxalltools/">&lt; Terug naar TraXall Tools</a>
+</div>
+</header>
+</div>
+<main>
+<div class="overviewGrid">
+<section class="overviewBox overviewControls">
+<section aria-label="Kies of sleep een Full Fleetoverview Excel-bestand hierheen" class="uploadBlock" id="fileDropZone" role="button" tabindex="0">
+<div class="upload">
+<div>
+<label for="file">
         Upload Full Fleetoverview
        </label>
-       <br/>
-       <div class="filePicker" id="filePicker">
-        <label aria-label="Selecteer bestand of sleep het naar dit veld" class="filePickerButton" for="file">
-        </label>
-        <input accept=".xlsx" id="file" type="file"/>
-       </div>
-      </div>
-      <div class="referenceBlock">
-       <label for="reference">
+<br/>
+<div class="filePicker" id="filePicker">
+<label aria-label="Selecteer bestand of sleep het naar dit veld" class="filePickerButton" for="file">
+</label>
+<input accept=".xlsx" id="file" type="file"/>
+</div>
+</div>
+<div class="referenceBlock">
+<label for="reference">
         Peildatum
        </label>
-       <br/>
-       <input id="reference" type="date"/>
-       <div class="muted" id="fileinfo">
+<br/>
+<input id="reference" type="date"/>
+<div class="muted" id="fileinfo">
         Kies je Excel-bestand (.xlsx) om te beginnen
        </div>
-      </div>
-     </div>
-     <div id="notice" role="status">
-     </div>
-    </section>
-    <nav class="mainTabs">
-     <button class="primary" id="contractTab">
+</div>
+</div>
+<div id="notice" role="status">
+</div>
+</section>
+<nav class="mainTabs">
+<button class="primary" id="contractTab">
       Contractcontrole
      </button>
-     <button id="statusTab">
+<button id="statusTab">
       Statuscontrole
-     </button>
-    </nav>
-   </section>
-   <section class="overviewBox overviewStatus is-empty" id="overviewStatus">
-    <div class="statusPlaceholder" id="statusPlaceholder">
-     <strong>
+     </button><button id="expiryTab">Expiraties</button>
+</nav>
+</section>
+<section class="overviewBox overviewStatus is-empty" id="overviewStatus">
+<div class="statusPlaceholder" id="statusPlaceholder">
+<strong>
       Statusoverzicht
      </strong>
-     <span>
+<span>
       Upload een Full Fleetoverview
      </span>
-    </div>
-    <div class="statusSummary">
-     <div class="cards">
-      <button class="card green" data-view="active">
-       <strong id="active">
+</div>
+<div class="statusSummary">
+<div class="cards">
+<button class="card green" data-view="active">
+<strong id="active">
         —
        </strong>
-       <span>
+<span>
         Actieve kentekens
        </span>
-       <small>
+<small>
         Unieke kentekens · status Actief
        </small>
-      </button>
-      <button class="card orange" data-view="orange">
-       <strong id="orange">
+</button>
+<button class="card orange" data-view="orange">
+<strong id="orange">
         —
        </strong>
-       <span>
+<span>
         2 tot 5 dagen
        </span>
-       <small>
+<small>
         2, 3 of 4 kalenderdagen in status
        </small>
-      </button>
-      <button class="card red" data-view="red">
-       <strong id="red">
+</button>
+<button class="card red" data-view="red">
+<strong id="red">
         —
        </strong>
-       <span>
+<span>
         Opvolging nodig
        </span>
-       <small>
+<small>
         5+ dagen · selectie 3+ maanden
        </small>
-      </button>
-     </div>
-     <button class="dupbar" id="duplicateBar">
+</button>
+</div>
+<button class="dupbar" id="duplicateBar">
       Geen dubbele berijders
      </button>
-    </div>
-   </section>
-  </div>
-  <section class="panel" id="contractPanel">
-   <h2>
+</div>
+<aside class="rdwRetryBox"><div class="rdwRetryTitle">Ontbrekende RDW-gegevens opnieuw ophalen</div><button id="rdwRetry" type="button"><img alt="RDW" class="rdw-logo" src="logo-rdw.png"/><img alt="Bezig met ophalen" class="rdw-wheel" src="troll-wheel.gif"/></button></aside></section>
+</div>
+<section class="panel" id="contractPanel">
+<h2>
     Contractcontrole
    </h2>
-   <div class="toolbar settings">
-    <label>
+<div class="toolbar settings">
+<label>
      Maximale kilometerstand
      <br/>
-     <input id="maxKm" min="10000" step="10000" type="number" value="180000"/>
-    </label>
-    <label>
+<input id="maxKm" min="10000" step="10000" type="number" value="180000"/>
+</label>
+<label>
      Toegestane afwijking (%)
      <br/>
-     <input id="tolerance" max="100" min="0" step="5" type="number" value="15"/>
-    </label>
-    <label>
-     Contracten < ... maanden negeren
+<input id="tolerance" max="100" min="0" step="5" type="number" value="15"/>
+</label>
+<label>
+     Contracten &lt; ... maanden negeren
      <br/>
-     <input id="minAge" min="0" step="3" type="number" value="12"/>
-    </label>
-   </div>
-   <div class="contractSummary" id="contractSummary">
-   </div>
-   <div class="toolbar">
-    <input aria-label="Zoek contract" id="contractSearch" placeholder="Zoek kenteken, berijder, ID of klant…"/>
-    <details class="multiselect" id="contractFilter">
-     <summary aria-label="Contractfilters">
+<input id="minAge" min="0" step="3" type="number" value="12"/>
+</label>
+</div>
+<div class="contractSummary" id="contractSummary">
+</div>
+<div class="toolbar">
+<input aria-label="Zoek contract" id="contractSearch" placeholder="Zoek kenteken, berijder, ID of klant…"/>
+<details class="multiselect" id="contractFilter">
+<summary aria-label="Contractfilters">
       Selecteer opties
      </summary>
-     <div class="multi-options">
-     </div>
-    </details>
-    <button class="primary excelExportButton" disabled="" id="contractExport">
-     <span aria-hidden="true" class="excelExportIcon"></span>
-     <span>Excel export (.xlsx)</span>
-    </button>
-   </div>
-   <p class="muted" id="contractCount">
-   </p>
-   <div class="tablewrap">
-    <table>
-     <thead>
-      <tr>
-       <th>
+<div class="multi-options">
+</div>
+</details>
+<button class="primary excelExportButton" disabled="" id="contractExport">
+<span aria-hidden="true" class="excelExportIcon"></span>
+<span>Excel export (.xlsx)</span>
+</button>
+</div>
+<p class="muted" id="contractCount">
+</p>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>
         Kenteken / berijder
        </th>
-       <th>
+<th>
         Autoleeftijd
        </th>
-       <th>
+<th>
         Laatste km-stand
        </th>
-       <th>
+<th>
         Contract km/jaar / looptijd
        </th>
-       <th>
+<th>
         Werkelijk km/jaar
        </th>
-       <th>
+<th>
         Afwijking
        </th>
-       <th>
+<th>
         Prognose einde
        </th>
-       <th>
+<th>
         Max. km bereikt
        </th>
-       <th>
+<th>
         Signaal
        </th>
-      </tr>
-     </thead>
-     <tbody id="contractBody">
-      <tr>
-       <td class="empty" colspan="9">
+</tr>
+</thead>
+<tbody id="contractBody">
+<tr>
+<td class="empty" colspan="9">
         Upload een Full Fleetoverview
        </td>
-      </tr>
-     </tbody>
-    </table>
-   </div>
-   <details>
-    <summary>
+</tr>
+</tbody>
+</table>
+</div>
+<details>
+<summary>
      Berekening en aannames
     </summary>
-    <p>
+<p>
      Contractcontrole beoordeelt alleen status Actief met Financing Method OL of OL LEG. STR, andere financieringsvormen en lege waarden worden uitgesloten. De statuscontrole blijft alle financieringsvormen verwerken.
     </p>
-    <p>
+<p>
      De instelbare leeftijdsgrens (standaard 12 maanden) gebruikt de RDW-datum eerste toelating tot de datum van de laatste kilometerstand, in volle kalendermaanden. Voorbeeld: 01-01-2024 tot 01-07-2026 is 30 maanden; bij een grens van 31 maanden wordt die auto genegeerd. Kilometerstanden onder 100 km worden overgeslagen. Zonder geldige RDW-datum of kilometerdatum staat een auto alleen onder datacontrole / alle contracten, niet bij de gefilterde meldingen. De contractduur begint bij Start Date; gemiddeld jaargebruik wordt vanaf RDW eerste toelating berekend. Een ontbrekende startdatum of kilometerstand blijft zichtbaar onder datacontrole. Kleuren: 15% tot minder dan 25% oranje, 25% tot en met 50% lichtrood, boven 50% donkerrood. De ingestelde tolerantie bepaalt welke afwijkingen een melding krijgen.
     </p>
-    <p>
+<p>
      Advies: werkelijk jaargebruik afgerond op 5.000 km; totale looptijd vanaf de start in volle kalendermaanden tot de maximale kilometerstand, maximaal de bestaande contractduur. Het is dus geen resterende looptijd. De duur wordt berekend met het onafgeronde gebruik. Een advies van 0 maanden vraagt handmatige beoordeling.
     </p>
-    <p>
+<p>
      Start = Start Date. Contracteinde = start + looptijd in maanden (Contract Duration). Jaarbudget = Contract Mileage. Gebruik per dag = laatste kilometerstand (Vehicle Mileage) / kalenderdagen tussen RDW eerste toelating en laatste registratiedatum (Date of Last Mileage). Werkelijk km/jaar = gemeten gebruik per dag × 365,25 (geannualiseerd, geen afzonderlijk kalenderjaartotaal). Afwijking = absolute waarde van (werkelijk km/jaar / jaarbudget − 1) × 100%. Meer of minder kilometers staat apart vermeld. Precies op de tolerantiegrens telt als binnen de marge.
     </p>
-    <p>
+<p>
      Prognose eindstand = laatste kilometerstand + gebruik per dag × dagen van laatste kilometerregistratie tot contracteinde. Maximale kilometerstand bereikt = datum laatste kilometerregistratie + (maximum − laatste kilometerstand) / gebruik per dag. We signaleren een verlopen looptijd, een geregistreerde einddatum (End Date) die afwijkt van start + looptijd, en het bereiken van de maximale kilometerstand vóór het contracteinde. De maximumgrens staat los van de procentuele tolerantie.
     </p>
-    <p>
+<p>
      Het gemiddelde gebruikt de volledige kilometerstand sinds eerste toelating, met gelijkblijvend gebruik als aanname. Het is geen meting van uitsluitend het huidige contract of de huidige berijder; daarvoor is ook een kilometerstand bij contractstart nodig. Een oude kilometerregistratie maakt de prognose minder actueel; de datum en ouderdom staan erbij. Ontbrekende of ongeldige rekengegevens staan apart onder datacontrole.
     </p>
-   </details>
-  </section>
-  <section class="panel" hidden="" id="statusPanel">
-   <h2 id="heading">
+</details>
+</section>
+<section class="panel" hidden="" id="statusPanel">
+<h2 id="heading">
     Statuscontrole
    </h2>
-   <div class="tabs">
-    <button class="selected" data-view="attention">
+<div class="tabs">
+<button class="selected" data-view="attention">
      Opvolgen
     </button>
-    <button data-view="duplicates">
+<button data-view="duplicates">
      Dubbele berijders
      <span id="dups">
       (0)
      </span>
-    </button>
-    <button data-view="quality">
+</button>
+<button data-view="quality">
      Datacontrole
      <span id="quality">
       (0)
      </span>
-    </button>
-   </div>
-   <div class="toolbar">
-    <input aria-label="Zoeken" id="search" placeholder="Zoek kenteken, berijder, ID, klant of leverancier…"/>
-    <details class="multiselect" id="status">
-     <summary aria-label="Statusfilters">
+</button>
+</div>
+<div class="toolbar">
+<input aria-label="Zoeken" id="search" placeholder="Zoek kenteken, berijder, ID, klant of leverancier…"/>
+<details class="multiselect" id="status">
+<summary aria-label="Statusfilters">
       Selecteer opties
      </summary>
-     <div class="multi-options">
-     </div>
-    </details>
-    <button class="primary excelExportButton" disabled="" id="export">
-     <span aria-hidden="true" class="excelExportIcon"></span>
-     <span>Excel export (.xlsx)</span>
-    </button>
-   </div>
-   <p class="muted" id="count">
+<div class="multi-options">
+</div>
+</details>
+<button class="primary excelExportButton" disabled="" id="export">
+<span aria-hidden="true" class="excelExportIcon"></span>
+<span>Excel export (.xlsx)</span>
+</button>
+</div>
+<p class="muted" id="count">
     Nog geen bestand ingelezen
    </p>
-   <div class="tablewrap">
-    <table>
-     <thead>
-      <tr>
-       <th>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>
         Kenteken / order
        </th>
-       <th>
+<th>
         Berijder
        </th>
-       <th>
+<th>
         Berijder-ID
        </th>
-       <th>
+<th>
         Klant / entiteit
        </th>
-       <th>
+<th>
         Auto / leverancier
        </th>
-       <th>
+<th>
         Status
        </th>
-       <th>
+<th>
         Sinds
        </th>
-       <th>
+<th>
         Dagen
        </th>
-       <th>
+<th>
         Signaal
        </th>
-       <th>
+<th>
         Excel-rij
        </th>
-      </tr>
-     </thead>
-     <tbody id="body">
-      <tr>
-       <td class="empty" colspan="10">
+</tr>
+</thead>
+<tbody id="body">
+<tr>
+<td class="empty" colspan="10">
         Upload je Fleetoverview om de analyse te starten.
        </td>
-      </tr>
-     </tbody>
-    </table>
-   </div>
-  </section>
-  <details class="panel" hidden="" id="statusRules">
-   <summary>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section class="panel" hidden="" id="expiryPanel"><h2>Expiratie</h2><p class="muted">Actieve contracten met een geldige End Date binnen de gekozen periode · STR wordt genegeerd · contracten met Renewed By worden niet in het gewone expiratieoverzicht getoond.</p><div class="toolbar settings"><label>Toon contracten die binnen<br/><select id="expiryMonths"><option value="3">3 maanden</option><option selected="" value="6">6 maanden</option><option value="9">9 maanden</option><option value="12">12 maanden</option><option value="18">18 maanden</option><option value="24">24 maanden</option></select></label></div><div class="expiry-alert" hidden="" id="renewalAlert"><div class="expiry-alert-head">⚠ LET OP! ACTIE VEREIST</div><div class="expiry-alert-copy">Deze contracten zijn al vernieuwd, maar de verwachte leverdatum van de nieuwe auto ligt minimaal 1 maand ná de einddatum van het huidige contract.</div><div class="tablewrap"><table><thead><tr><th>Klant</th><th>Berijder</th><th>Huidige auto</th><th>Kenteken</th><th>Einddatum huidig</th><th>Nieuwe order</th><th>Verwachte leverdatum</th><th>Overbrugging</th></tr></thead><tbody id="renewalAlertBody"></tbody></table></div></div><div class="toolbar"><input aria-label="Zoek expiratie" id="expirySearch" placeholder="Zoek klant, berijder, auto, kenteken of leasemaatschappij…"/><button class="primary" disabled="" id="expiryExport">Excel export (.xlsx)</button></div><p class="muted" id="expiryCount">Nog geen bestand ingelezen</p><div class="tablewrap"><table><thead><tr><th>Klantnaam</th><th>Berijdernaam</th><th>Autotype</th><th>Kenteken</th><th>Huidige leasemaatschappij</th><th>Einddatum contract</th><th>Maanden tot einde</th><th>Werkelijk km/jaar</th></tr></thead><tbody id="expiryBody"><tr><td class="empty" colspan="8">Upload je Fleetoverview om de expiraties te bekijken.</td></tr></tbody></table></div></section><details class="panel" hidden="" id="statusRules">
+<summary>
     Zo worden de controles uitgevoerd
    </summary>
-   <ul>
-    <li>
+<ul>
+<li>
      Kolommen worden herkend aan hun naam, ongeacht de volgorde. Hoofdletters en extra spaties maken niet uit. Status: Status. Datum sinds status: Status since. Berijder-ID: Driver ID. Kenteken: License Plate.
     </li>
-    <li>
+<li>
      Actief telt mee in het groene vak (unieke, niet-lege kentekens). Actief levert alleen een opvolgmelding op bij een dubbele berijder-ID.
     </li>
-    <li>
+<li>
      Een niet-lege berijder-ID is dubbel als deze in minstens twee regels voorkomt met status Actief of Inleverproces bezig. Alle betrokken regels worden getoond; andere statussen tellen niet mee voor deze controle.
     </li>
-    <li>
+<li>
      Wacht op afleverdocumenten en Annulering worden genegeerd. Vehicle selection in process / progress wordt pas rood vanaf 3 kalendermaanden (geen oranje fase). Andere statussen dan Actief en Inactief: oranje bij 2–4 dagen, rood vanaf 5 dagen. Inleverproces bezig valt ook onder deze ouderdomscontrole. Inactief wordt genegeerd.
     </li>
-    <li>
+<li>
      Leeftijd is het verschil in kalenderdagen tussen statusdatum en peildatum, zonder tijdstip. De peildatum staat bij openen op vandaag.
     </li>
-    <li>
+<li>
      Ontbrekende/ongeldige/toekomstige statusdatums bij overige statussen worden apart getoond onder Datacontrole, zonder ouderdomskleur. Lege ID’s worden nooit als dubbel aangemerkt.
     </li>
-    <li>
+<li>
      De analyse ziet alleen de inhoud van het geüploade bestand. Upload een nieuwe export voor actuele gegevens. Sluiten of vernieuwen wist de ingelezen gegevens.
     </li>
-   </ul>
-  </details>
-  <footer>
+</ul>
+</details>
+<footer>
    Vloot analyse intern · versie 2.4
   </footer>
- </main>
- <script>
+</main>
+<script>
   'use strict';
 const $=id=>document.getElementById(id), norm=v=>String(v??'').trim().replace(/\s+/g,' ').toLowerCase(), str=v=>String(v??'').trim(), esc=v=>str(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const DAY=86400000;let records=[], analyzed=[], visible=[], view='attention', filename='', sheetname='';
 const today=new Date();$('reference').value=[today.getFullYear(),String(today.getMonth()+1).padStart(2,'0'),String(today.getDate()).padStart(2,'0')].join('-');
 function dateValue(v,epoch1904=false){if(v===null||v===undefined||v==='')return null;if(typeof v==='number')return Number.isFinite(v)?Math.floor(v)+(epoch1904?Date.UTC(1904,0,1)/DAY:Date.UTC(1899,11,30)/DAY):null;let m=str(v).match(/^(\d{4})-(\d{2})-(\d{2})(?:[T ].*)?$/);let y,mo,d;if(m){[,y,mo,d]=m}else{m=str(v).match(/^(\d{1,2})[-/](\d{1,2})[-/](\d{4})(?: .*)?$/);if(!m)return null;[,d,mo,y]=m}let dt=new Date(Date.UTC(+y,+mo-1,+d));return dt.getUTCFullYear()===+y&&dt.getUTCMonth()===+mo-1&&dt.getUTCDate()===+d?dt.getTime()/DAY:null}
 function analyze(rows,ref){const counts=new Map();rows.forEach(r=>{if(r.id&&['actief','inleverproces bezig'].includes(r.key))counts.set(r.id,(counts.get(r.id)||0)+1)});return rows.filter(r=>r.key!=='inactief'&&!ignored(r.key)).map(r=>{let age=r.date===null?null:ref-r.date;let other=r.key!=='actief';let issues=[];if(!r.key)issues.push('Status ontbreekt');if(other&&(age===null||age<0))issues.push(age<0?'Statusdatum ligt in de toekomst':'Statusdatum ontbreekt / ongeldig');if(r.key==='actief'&&!r.plate)issues.push('Actief zonder kenteken');return {...r,age,duplicate:!!r.id&&['actief','inleverproces bezig'].includes(r.key)&&counts.get(r.id)>1,band:selection(r.key)?(r.date!==null&&ref>=addMonths(r.date,3)?'red':''):(other&&r.key&&age!==null&&age>=2?(age>=5?'red':'orange'):''),issues}})}
-function recalc(){let ref=dateValue($('reference').value);if(ref===null)return;analyzed=analyze(records,ref);$('active').textContent=new Set(analyzed.filter(r=>r.key==='actief'&&r.plate).map(r=>norm(r.plate).replace(/[-\s]/g,''))).size;$('orange').textContent=analyzed.filter(r=>r.band==='orange').length;$('red').textContent=analyzed.filter(r=>r.band==='red').length;$('dups').textContent='('+new Set(analyzed.filter(r=>r.duplicate).map(r=>r.id)).size+' ID’s)';$('quality').textContent='('+analyzed.filter(r=>r.issues.length).length+')';render();recalcContracts();const ids=new Set(analyzed.filter(r=>r.duplicate).map(r=>r.id));$('duplicateBar').textContent=ids.size?ids.size+' dubbele berijder-ID · '+analyzed.filter(r=>r.duplicate).length+' betrokken regels — bekijken':'Geen dubbele berijder-ID’s in Actief / Inleverproces bezig';}
+function recalc(){let ref=dateValue($('reference').value);if(ref===null)return;analyzed=analyze(records,ref);$('active').textContent=new Set(analyzed.filter(r=>r.key==='actief'&&r.plate).map(r=>norm(r.plate).replace(/[-\s]/g,''))).size;$('orange').textContent=analyzed.filter(r=>r.band==='orange').length;$('red').textContent=analyzed.filter(r=>r.band==='red').length;$('dups').textContent='('+new Set(analyzed.filter(r=>r.duplicate).map(r=>r.id)).size+' ID’s)';$('quality').textContent='('+analyzed.filter(r=>r.issues.length).length+')';render();recalcContracts();recalcExpiry();const ids=new Set(analyzed.filter(r=>r.duplicate).map(r=>r.id));$('duplicateBar').textContent=ids.size?ids.size+' dubbele berijder-ID · '+analyzed.filter(r=>r.duplicate).length+' betrokken regels — bekijken':'Geen dubbele berijder-ID’s in Actief / Inleverproces bezig';}
 function signals(r){return [r.band==='red'?(selection(r.key)?'3 maanden verstreken':'5+ dagen'):r.band==='orange'?'2–4 dagen':'',r.duplicate?'Dubbele berijder-ID':'',...r.issues].filter(Boolean)}
 function dateLabel(r){return r.date===null?str(r.rawdate)||'—':new Date(r.date*DAY).toLocaleDateString('nl-NL',{timeZone:'UTC'})}
 function render(){const q=norm($('search').value),status=selectedValues('status');visible=analyzed.filter(r=>(view==='active'?r.key==='actief':view==='duplicates'?r.duplicate:view==='quality'?r.issues.length:view==='attention'?r.band==='red'||r.duplicate:r.band===view)&&(status.includes('*')||status.includes(r.key))&&(!q||norm([r.plate,r.order,r.name,r.id,r.client,r.entity,r.car,r.supplier,r.status].join(' ')).includes(q))).sort((a,b)=>view==='duplicates'?a.id.localeCompare(b.id)||(b.age??-1)-(a.age??-1):(b.age??-1)-(a.age??-1));$('heading').textContent='Statuscontrole';
@@ -1923,12 +1924,12 @@ document.querySelectorAll('[data-view]').forEach(b=>{b.classList.toggle('selecte
 async function unzip(buffer){const data=new Uint8Array(buffer),dv=new DataView(buffer);let end=-1;for(let i=data.length-22;i>=Math.max(0,data.length-65557);i--)if(dv.getUint32(i,true)===0x06054b50){end=i;break}if(end<0)throw Error('Geen geldig XLSX-bestand.');let p=dv.getUint32(end+16,true),n=dv.getUint16(end+10,true);const files=new Map(),dec=new TextDecoder();for(let j=0;j<n;j++){if(dv.getUint32(p,true)!==0x02014b50)throw Error('Beschadigd Excel-bestand.');let method=dv.getUint16(p+10,true),size=dv.getUint32(p+20,true),nameLen=dv.getUint16(p+28,true),extra=dv.getUint16(p+30,true),comment=dv.getUint16(p+32,true),offset=dv.getUint32(p+42,true),name=dec.decode(data.slice(p+46,p+46+nameLen));files.set(name,{method,size,offset});p+=46+nameLen+extra+comment}return async name=>{const e=files.get(name);if(!e)return null;let start=e.offset+30+dv.getUint16(e.offset+26,true)+dv.getUint16(e.offset+28,true),bytes=data.slice(start,start+e.size);if(e.method===8){bytes=new Uint8Array(await new Response(new Blob([bytes]).stream().pipeThrough(new DecompressionStream('deflate-raw'))).arrayBuffer())}else if(e.method!==0)throw Error('Deze Excel-compressie wordt niet ondersteund.');return dec.decode(bytes)}}
 function xml(s){const d=new DOMParser().parseFromString(s,'application/xml');if(d.getElementsByTagName('parsererror').length)throw Error('Ongeldige Excel-inhoud.');return d}const tags=(el,t)=>Array.from(el.getElementsByTagNameNS('*',t));
 async function readXlsx(buffer){const get=await unzip(buffer),wb=xml(await get('xl/workbook.xml')),rels=xml(await get('xl/_rels/workbook.xml.rels')),shared=await get('xl/sharedStrings.xml');const strings=shared?tags(xml(shared),'si').map(si=>tags(si,'t').map(t=>t.textContent).join('')):[];const epoch=['1','true'].includes(tags(wb,'workbookPr')[0]?.getAttribute('date1904'));for(const sheet of tags(wb,'sheet')){const id=sheet.getAttribute('r:id')||sheet.getAttributeNS('http://schemas.openxmlformats.org/officeDocument/2006/relationships','id');const rel=tags(rels,'Relationship').find(r=>r.getAttribute('Id')===id);if(!rel)continue;let target=rel.getAttribute('Target'),path=target.startsWith('/')?target.slice(1):'xl/'+target;path=path.split('/').reduce((a,x)=>{if(x==='..')a.pop();else if(x!=='.')a.push(x);return a},[]).join('/');const source=await get(path);if(!source)continue;const rows=tags(xml(source),'row').map(row=>{const values=[];for(const c of tags(row,'c')){let col=0;for(const ch of (c.getAttribute('r')||'').replace(/[0-9]/g,''))col=col*26+ch.charCodeAt(0)-64;const t=c.getAttribute('t'),v=tags(c,'v')[0]?.textContent??'';values[col-1]=t==='s'?strings[+v]:t==='inlineStr'?tags(c,'t').map(t=>t.textContent).join(''):t==='str'||t==='d'?v:v!==''?Number(v):''}return {row:+row.getAttribute('r'),values}});const required=['Financing Method','License Plate','Driver ID','Status','Status since','Start Date','Contract Duration','Contract Mileage','Date of Last Mileage','Vehicle Mileage'];
-const used=[...required,'End Date','Order Nr','Driver First Name','Driver Name','client','Entiteit','Brand','Model','Supplier'];
+const used=[...required,'End Date','Order Nr','Driver First Name','Driver Name','client','Entiteit','Brand','Model','Supplier','Renewed By','Expected Delivery Date'];
 const h=rows.findIndex(r=>{const names=new Set(r.values.map(norm));return names.has('status')&&(names.has('license plate')||names.has('driver id')||names.has('status since'))});if(h<0)continue;
 const headers=rows[h].values, positions=new Map();headers.forEach((v,i)=>{const k=norm(v);if(!k)return;if(!positions.has(k))positions.set(k,[]);positions.get(k).push(i)});
 const missing=required.filter(n=>!positions.has(norm(n))),duplicates=used.filter(n=>(positions.get(norm(n))||[]).length>1);
 if(missing.length||duplicates.length)throw Error('Werkblad '+sheet.getAttribute('name')+': '+[missing.length?'ontbrekende kolomnamen: '+missing.join(', '):'',duplicates.length?'dubbele kolomnamen: '+duplicates.join(', '):''].filter(Boolean).join('; ')+'.');
-return {sheet:sheet.getAttribute('name'),rows:rows.slice(h+1).filter(r=>r.values.some(v=>v!==''&&v!=null)).map(({row,values:v})=>{const get=name=>v[positions.get(norm(name))?.[0]];const km=get('Vehicle Mileage');return {row,plate:str(get('License Plate')),order:str(get('Order Nr')),name:[get('Driver First Name'),get('Driver Name')].filter(Boolean).join(' '),id:str(get('Driver ID')),client:str(get('client')),entity:str(get('Entiteit')),car:[get('Brand'),get('Model')].filter(Boolean).join(' '),supplier:str(get('Supplier')),financingMethod:str(get('Financing Method')),status:str(get('Status')),key:norm(get('Status')),rawdate:get('Status since'),date:dateValue(get('Status since'),epoch),contractStart:dateValue(get('Start Date'),epoch),months:Number(get('Contract Duration')),annual:Number(get('Contract Mileage')),lastDate:dateValue(get('Date of Last Mileage'),epoch),km:km===''||km==null?null:Number(km),sourceEnd:dateValue(get('End Date'),epoch)}})}}throw Error('Full Fleetoverview-format niet herkend. Verwacht een kopregel met onder andere Status, License Plate en Driver ID.');}
+return {sheet:sheet.getAttribute('name'),rows:rows.slice(h+1).filter(r=>r.values.some(v=>v!==''&&v!=null)).map(({row,values:v})=>{const get=name=>v[positions.get(norm(name))?.[0]];const km=get('Vehicle Mileage');return {row,plate:str(get('License Plate')),order:str(get('Order Nr')),name:[get('Driver First Name'),get('Driver Name')].filter(Boolean).join(' '),id:str(get('Driver ID')),client:str(get('client')),entity:str(get('Entiteit')),car:[get('Brand'),get('Model')].filter(Boolean).join(' '),supplier:str(get('Supplier')),renewedBy:str(get('Renewed By')),expectedDeliveryDate:dateValue(get('Expected Delivery Date'),epoch),financingMethod:str(get('Financing Method')),status:str(get('Status')),key:norm(get('Status')),rawdate:get('Status since'),date:dateValue(get('Status since'),epoch),contractStart:dateValue(get('Start Date'),epoch),months:Number(get('Contract Duration')),annual:Number(get('Contract Mileage')),lastDate:dateValue(get('Date of Last Mileage'),epoch),km:km===''||km==null?null:Number(km),sourceEnd:dateValue(get('End Date'),epoch)}})}}throw Error('Full Fleetoverview-format niet herkend. Verwacht een kopregel met onder andere Status, License Plate en Driver ID.');}
 
 async function processFleetFile(f){if(!f)return;$('notice').className='';$('notice').textContent='Bestand wordt ingelezen…';$('file').disabled=true;try{if(!/\.xlsx$/i.test(f.name))throw Error('Selecteer een .xlsx-bestand.');const result=await readXlsx(await f.arrayBuffer());records=result.rows;filename=f.name;sheetname=result.sheet;view='attention';$('search').value='';setOptions('status',[['*','Alle statussen'],...Array.from(new Map(records.filter(r=>r.key!=='inactief'&&!ignored(r.key)).map(r=>[r.key,r.status||'Status ontbreekt']))).sort((a,b)=>a[1].localeCompare(b[1]))],['*']);$('fileinfo').textContent=filename+' · Werkblad '+sheetname;$('notice').textContent='Bestand ingelezen. De analyse is bijgewerkt.';$('overviewStatus').classList.remove('is-empty');$('overviewStatus').classList.add('has-data');recalc();await refreshRdw()}catch(err){$('notice').className='error';$('notice').textContent='Inlezen mislukt: '+err.message+(filename?' De vorige analyse blijft zichtbaar.':'')}finally{$('file').disabled=false;$('file').value=''}}
 $('file').addEventListener('change',e=>processFleetFile(e.target.files[0]));
@@ -1943,9 +1944,9 @@ const rdwCache=new Map();let rdwBusy=false;
 const cleanPlate=p=>str(p).toUpperCase().replace(/[-\s]/g,'');
 function rdwDate(value){let s=str(value);if(/^\d{8}$/.test(s))s=s.slice(0,4)+'-'+s.slice(4,6)+'-'+s.slice(6,8);return dateValue(s)}
 async function requestRdw(batch){const url=new URL('https://opendata.rdw.nl/resource/m9d7-ebf2.json');url.searchParams.set('$select','kenteken,datum_eerste_toelating');url.searchParams.set('$where',"kenteken in ("+batch.map(p=>"'"+p+"'").join(',')+")");url.searchParams.set('$limit','1000');for(let attempt=0;attempt<3;attempt++){try{const response=await fetch(url,{signal:AbortSignal.timeout(20000)});if(!response.ok)throw Error('RDW HTTP '+response.status);const json=await response.json();if(!Array.isArray(json))throw Error('Ongeldig RDW-antwoord');return new Map(json.map(r=>[cleanPlate(r.kenteken),rdwDate(r.datum_eerste_toelating)]))}catch(e){if(attempt===2)throw e;await new Promise(resolve=>setTimeout(resolve,500*(attempt+1)))}}}
-async function refreshRdw(){
+async function refreshRdw(force=false){
   if(rdwBusy||!records.length)return;
-  rdwBusy=true;
+  rdwBusy=true;const q=$('rdwRetry'),started=Date.now();if(q){q.disabled=true;q.classList.add('rdw-loading');}
   const fileInput=$('file');
   const wasDisabled=fileInput?fileInput.disabled:false;
   if(fileInput)fileInput.disabled=true;
@@ -1987,10 +1988,7 @@ async function refreshRdw(){
     }
     await Promise.all([worker(),worker()]);
     sync();
-  }finally{
-    rdwBusy=false;
-    if(fileInput)fileInput.disabled=wasDisabled;
-  }
+  }finally{const w=900-(Date.now()-started);if(w>0)await new Promise(r=>setTimeout(r,w));rdwBusy=false;if(q){q.disabled=false;q.classList.remove('rdw-loading');}if(fileInput)fileInput.disabled=wasDisabled;}
 }
 function eligibleContract(r){return r.key==='actief'&&['ol','ol leg'].includes(norm(r.financingMethod))}
 function contractAnalysis(rows,ref,maxKm,tolerance,minAge=12){return rows.map(r=>({...r,vehicleAge:fullMonths(r.firstRegistration,r.lastDate)})).filter(r=>eligibleContract(r)&&(r.vehicleAge==null||r.vehicleAge>=minAge)&&(r.km==null||!Number.isFinite(r.km)||r.km>=100)).map(r=>{let errors=[],alerts=[],end=null,rate=null,annualEstimate=null,deviation=null,endKm=null,limitDate=null;if(r.contractStart==null||r.contractStart>ref)errors.push('Start Date ontbreekt / ongeldig');if(!Number.isInteger(r.months)||r.months<=0)errors.push('Looptijd ontbreekt / ongeldig');if(!(r.annual>0))errors.push('Jaarbudget ontbreekt / ongeldig');if(r.lastDate==null||r.lastDate>ref||r.contractStart!=null&&r.lastDate<=r.contractStart)errors.push('Excel: kilometerdatum ontbreekt / ongeldig');if(r.km==null||!Number.isFinite(r.km)||r.km<0)errors.push('Excel: kilometerstand ontbreekt / ongeldig');if(r.contractStart!=null&&r.contractStart<=ref&&Number.isInteger(r.months)&&r.months>0){end=addMonths(r.contractStart,r.months);if(ref>=end)alerts.push('Looptijd verstreken');if(r.sourceEnd!=null&&r.sourceEnd!==end)alerts.push('End Date wijkt af van looptijd')}
@@ -2001,13 +1999,18 @@ function severity(v){const a=Math.abs(v??0);return a>50?'darkred':a>=25?'lightre
 function direction(v){return v==null?'':v>0?'Meer kilometers':v<0?'Minder kilometers':'Gelijk aan contract'}
 function advice(r){return r.adviceAnnual==null?'Niet berekenbaar':num(r.adviceAnnual)+'km/'+r.adviceMonths+'mnd'}
 function renderContracts(){const q=norm($('contractSearch').value),f=selectedValues('contractFilter');contractVisible=contracts.filter(r=>(f.includes('all')||(f.includes('quality')&&r.errors.length)||(f.includes('alerts')&&r.alerts.length&&r.vehicleAge!=null))&&(!q||norm([r.plate,r.name,r.id,r.client,r.entity,r.supplier].join(' ')).includes(q))).sort((a,b)=>(b.deviation==null?-1:Math.abs(b.deviation))-(a.deviation==null?-1:Math.abs(a.deviation)));$('contractCount').textContent=contractVisible.length+' contracten in selectie';$('contractExport').disabled=!filename;$('contractBody').innerHTML=contractVisible.map(r=>`<tr><td>${esc(r.plate)||'Geen kenteken'}<div class="muted">${esc(r.name)} · ${esc(r.id)}<br>${esc(r.client)}</div></td><td>${r.vehicleAge==null?'Onbekend':r.vehicleAge+' mnd'}<div class="muted">Eerste toelating: ${df(r.firstRegistration)}</div></td><td>${num(r.km)} km<div class="muted">${df(r.lastDate)} · ${r.readingAge??'—'} dagen oud</div></td><td>${num(r.annual)}km / ${r.months||'—'}mnd</td><td>${num(r.annualEstimate)} km</td><td><span class="badge ${severity(r.deviation)}">${r.deviation==null?'—':Math.abs(r.deviation).toLocaleString('nl-NL',{maximumFractionDigits:1})+'%'}</span><div class="muted">${direction(r.deviation)}</div></td><td>${num(r.endKm)} km</td><td>${df(r.limitDate)}</td><td>${r.alerts.length&&r.adviceAnnual!=null?'<strong class="advice">Advies: '+advice(r)+'</strong>':''}${[...r.alerts.map(a=>'<span class="badge '+(/kilometers dan contract/.test(a)?severity(r.deviation):'neutral')+'">'+esc(a)+'</span>'),...r.errors.map(a=>'<span class="badge orange">'+esc(a)+'</span>')].join(' ')||'<span class="badge green">Binnen marges</span>'}</td></tr>`).join('')||'<tr><td class="empty" colspan="9">Geen contracten voor deze selectie.</td></tr>'}
-function tab(which){const c=which==='contract';$('contractPanel').hidden=!c;$('statusPanel').hidden=c;$('statusRules').hidden=c;$('contractTab').classList.toggle('primary',c);$('statusTab').classList.toggle('primary',!c);$('contractTab').setAttribute('aria-pressed',c);$('statusTab').setAttribute('aria-pressed',!c)}
-$('contractTab').onclick=()=>tab('contract');$('statusTab').onclick=()=>tab('status');$('duplicateBar').onclick=()=>{tab('status');view='duplicates';resetStatusSelection();$('search').value='';render()};document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>tab('status')));$('maxKm').oninput=recalcContracts;$('tolerance').oninput=recalcContracts;$('minAge').oninput=recalcContracts;$('contractSearch').oninput=renderContracts;
+let expiryRows=[],expiryVisible=[],renewalAlerts=[];
+function monthsUntil(start,end){if(start==null||end==null||end<start)return null;let m=fullMonths(start,end);return addMonths(start,m)<end?m+1:m}
+function recalcExpiry(){const ref=dateValue($('reference').value),horizon=Number($('expiryMonths').value);if(ref==null||!Number.isFinite(horizon)||horizon<=0){expiryRows=[];renewalAlerts=[];renderExpiry();return}const limit=addMonths(ref,horizon),orderMap=new Map();for(const r of records){const k=norm(r.order);if(k&&!orderMap.has(k))orderMap.set(k,r)}const candidates=records.filter(r=>r.key==='actief'&&norm(r.financingMethod)!=='str'&&r.sourceEnd!=null&&r.sourceEnd>=ref&&r.sourceEnd<=limit);expiryRows=candidates.filter(r=>!str(r.renewedBy)).map(r=>{let annualEstimate=null;if(r.firstRegistration!=null&&r.lastDate!=null&&r.km!=null&&Number.isFinite(r.km)&&r.lastDate>r.firstRegistration)annualEstimate=r.km/(r.lastDate-r.firstRegistration)*365.25;return {...r,monthsRemaining:monthsUntil(ref,r.sourceEnd),annualEstimate}});renewalAlerts=candidates.filter(r=>str(r.renewedBy)).map(r=>{const next=orderMap.get(norm(r.renewedBy)),edd=next?.expectedDeliveryDate??null;if(edd==null||edd<addMonths(r.sourceEnd,1))return null;const daysGap=Math.round(edd-r.sourceEnd),monthsGap=monthsUntil(r.sourceEnd,edd);return {...r,newOrder:next?.order||r.renewedBy,expectedDeliveryDate:edd,daysGap,monthsGap}}).filter(Boolean).sort((a,b)=>a.sourceEnd-b.sourceEnd||a.client.localeCompare(b.client));renderExpiry()}
+function renderExpiry(){const q=norm($('expirySearch').value);expiryVisible=expiryRows.filter(r=>!q||norm([r.client,r.name,r.car,r.plate,r.supplier].join(' ')).includes(q)).sort((a,b)=>a.sourceEnd-b.sourceEnd||a.client.localeCompare(b.client));$('expiryCount').textContent=filename?expiryVisible.length+' niet-vernieuwde contracten binnen '+$('expiryMonths').value+' maanden':'';$('expiryExport').disabled=!expiryVisible.length;$('expiryBody').innerHTML=expiryVisible.map(r=>`<tr><td>${esc(r.client)||'—'}</td><td>${esc(r.name)||'—'}</td><td>${esc(r.car)||'—'}</td><td>${esc(r.plate)||'—'}</td><td>${esc(r.supplier)||'—'}</td><td>${df(r.sourceEnd)}</td><td>${r.monthsRemaining==null?'—':r.monthsRemaining}</td><td>${r.annualEstimate==null?'—':num(r.annualEstimate)+' km'}</td></tr>`).join('')||'<tr><td class="empty" colspan="8">'+(filename?'Geen niet-vernieuwde actieve contracten binnen deze periode.':'Upload je Fleetoverview om de expiraties te bekijken.')+'</td></tr>';const alert=$('renewalAlert'),body=$('renewalAlertBody');alert.hidden=!renewalAlerts.length;body.innerHTML=renewalAlerts.map(r=>`<tr><td>${esc(r.client)||'—'}</td><td>${esc(r.name)||'—'}</td><td>${esc(r.car)||'—'}</td><td>${esc(r.plate)||'—'}</td><td>${df(r.sourceEnd)}</td><td>${esc(r.newOrder)||'—'}</td><td><strong>${df(r.expectedDeliveryDate)}</strong></td><td><span class="badge red">${r.monthsGap==null?'':r.monthsGap+' mnd · '}${r.daysGap} dagen</span></td></tr>`).join('')}
+function tab(which){const x=which==='contract',y=which==='status',z=which==='expiry';$('contractPanel').hidden=!x;$('statusPanel').hidden=!y;$('expiryPanel').hidden=!z;$('statusRules').hidden=!y;$('contractTab').classList.toggle('primary',x);$('statusTab').classList.toggle('primary',y);$('expiryTab').classList.toggle('primary',z)}
+$('contractTab').onclick=()=>tab('contract');$('statusTab').onclick=()=>tab('status');$('expiryTab').onclick=()=>tab('expiry');$('duplicateBar').onclick=()=>{tab('status');view='duplicates';resetStatusSelection();$('search').value='';render()};document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>tab('status')));$('maxKm').oninput=recalcContracts;$('tolerance').oninput=recalcContracts;$('minAge').oninput=recalcContracts;$('rdwRetry').onclick=()=>refreshRdw(true);$('contractSearch').oninput=renderContracts;$('expiryMonths').onchange=recalcExpiry;$('expirySearch').oninput=renderExpiry;
 // Native XLSX export: typed cells, autofilter and frozen header, packaged as an uncompressed ZIP.
 function zipStore(files){const enc=new TextEncoder(),parts=[],central=[];let offset=0;function crc(bytes){let c=0xffffffff;for(const b of bytes){c^=b;for(let i=0;i<8;i++)c=(c>>>1)^((c&1)?0xedb88320:0)}return (c^0xffffffff)>>>0}for(const [name,content] of Object.entries(files)){const n=enc.encode(name),b=enc.encode(content),c=crc(b),local=new Uint8Array(30+n.length),v=new DataView(local.buffer);v.setUint32(0,0x04034b50,true);v.setUint16(4,20,true);v.setUint32(14,c,true);v.setUint32(18,b.length,true);v.setUint32(22,b.length,true);v.setUint16(26,n.length,true);local.set(n,30);parts.push(local,b);const cent=new Uint8Array(46+n.length),cv=new DataView(cent.buffer);cv.setUint32(0,0x02014b50,true);cv.setUint16(4,20,true);cv.setUint16(6,20,true);cv.setUint32(16,c,true);cv.setUint32(20,b.length,true);cv.setUint32(24,b.length,true);cv.setUint16(28,n.length,true);cv.setUint32(42,offset,true);cent.set(n,46);central.push(cent);offset+=local.length+b.length}const size=central.reduce((n,b)=>n+b.length,0),end=new Uint8Array(22),ev=new DataView(end.buffer);ev.setUint32(0,0x06054b50,true);ev.setUint16(8,central.length,true);ev.setUint16(10,central.length,true);ev.setUint32(12,size,true);ev.setUint32(16,offset,true);return new Blob([...parts,...central,end],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'})}
 function makeXlsx(headers,rows){const x=v=>esc(v).replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/g,''),col=i=>{let s='';for(i++;i;i=Math.floor((i-1)/26))s=String.fromCharCode(65+(i-1)%26)+s;return s},last=col(headers.length-1)+(rows.length+1);const data=[headers,...rows].map((r,i)=>`<row r="${i+1}">${r.map((v,j)=>typeof v==='number'&&Number.isFinite(v)?`<c r="${col(j)}${i+1}"><v>${Number(v.toFixed(2))}</v></c>`:`<c r="${col(j)}${i+1}" t="inlineStr"><is><t xml:space="preserve">${x(v??'')}</t></is></c>`).join('')}</row>`).join('');return zipStore({'[Content_Types].xml':'<?xml version="1.0"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/></Types>','_rels/.rels':'<?xml version="1.0"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>','xl/workbook.xml':'<?xml version="1.0"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets><sheet name="Analyse" sheetId="1" r:id="rId1"/></sheets></workbook>','xl/_rels/workbook.xml.rels':'<?xml version="1.0"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/></Relationships>','xl/worksheets/sheet1.xml':`<?xml version="1.0"?><worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><dimension ref="A1:${last}"/><sheetViews><sheetView workbookViewId="0"><pane ySplit="1" topLeftCell="A2" activePane="bottomLeft" state="frozen"/></sheetView></sheetViews><cols><col min="1" max="${headers.length}" width="23" customWidth="1"/></cols><sheetData>${data}</sheetData><autoFilter ref="A1:${last}"/></worksheet>`})}
 function downloadXlsx(name,headers,rows){const a=document.createElement('a');a.href=URL.createObjectURL(makeXlsx(headers,rows));a.download=name+'-'+$('reference').value+'.xlsx';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
 $('export').onclick=()=>downloadXlsx('Vloot-statuscontrole',['Kenteken','Order','Berijder','Berijder-ID','Klant','Entiteit','Auto','Leverancier','Status','Sinds','Dagen','Signaal','Excel-rij','Peildatum'],visible.map(r=>[r.plate,r.order,r.name,r.id,r.client,r.entity,r.car,r.supplier,r.status,dateLabel(r),r.age,signals(r).join(' | '),r.row,$('reference').value]));
+$('expiryExport').onclick=()=>downloadXlsx('Vloot-expiraties',['Klantnaam','Berijdernaam','Autotype','Kenteken','Huidige leasemaatschappij','Einddatum contract','Aantal maanden tot einde contract','Werkelijk km/jaar'],expiryVisible.map(r=>[r.client,r.name,r.car,r.plate,r.supplier,df(r.sourceEnd),r.monthsRemaining,r.annualEstimate==null?null:Math.round(r.annualEstimate)]));
 $('contractExport').onclick=()=>downloadXlsx('Vloot-contractcontrole',['Kenteken','Berijder','Berijder-ID','Klant','Auto','Leverancier','Financing Method','Contract km/jaar en looptijd','RDW eerste toelating','Autoleeftijd maanden bij km-stand','Leeftijdsfilter maanden','Datum km-stand','Km-stand','Werkelijk km/jaar','Afwijking %','Richting afwijking','Prognose eindstand','Maximum km bereikt op','Advies km/jaar en looptijd','Meldingen','Dataproblemen','Peildatum','Maximum km','Tolerantie %','Excel-rij'],contractVisible.map(r=>[r.plate,r.name,r.id,r.client,r.car,r.supplier,r.financingMethod,num(r.annual)+'km / '+r.months+'mnd',df(r.firstRegistration),r.vehicleAge,Number($('minAge').value),df(r.lastDate),r.km,r.annualEstimate,r.deviation==null?null:Math.abs(r.deviation),direction(r.deviation),r.endKm,df(r.limitDate),r.alerts.length?advice(r):'',r.alerts.join(' | '),r.errors.join(' | '),$('reference').value,Number($('maxKm').value),Number($('tolerance').value),r.row]));
 
 function selectedValues(id){return Array.from($(id).querySelectorAll('input:checked')).map(el=>el.value)}
