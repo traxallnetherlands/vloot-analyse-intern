@@ -49,25 +49,25 @@ html,body{min-height:100%;background:var(--tx-blue);font-family:Arial,sans-serif
 .actions-row #auditTab{grid-column:5!important;grid-row:1!important;width:100%!important}
 @media(max-width:1150px){.actions-row .mainTabs{grid-template-columns:repeat(5,minmax(0,1fr))!important}.actions-row #auditTab{grid-column:5!important;grid-row:1!important}}
 
-/* Resterende HTML-correcties */
-.flag-button{width:42px!important;height:42px!important;padding:6px!important;box-sizing:border-box!important}.flag-button img{width:100%!important;height:100%!important;object-fit:contain!important;display:block!important}.rdw-card:disabled .rdw-wheel,.rdw-card.is-loading .rdw-wheel{width:140px!important;height:140px!important;max-width:90%!important;max-height:90%!important;object-fit:contain!important}.panel .toolbar:has(input[type="search"]),.panel .toolbar:has(input[placeholder]){margin-bottom:12px!important}.panel .toolbar+.tablewrap,.panel .toolbar+div>.tablewrap{margin-top:12px!important}.contractSummary{margin:10px 0!important;padding:2px 0!important;min-height:0!important;line-height:1.25!important}.audit-fleet-kpi{overflow:hidden!important}.audit-fleet-kpi strong{margin-left:4px!important}.audit-fleet-kpi small{white-space:nowrap!important}.report-actions{overflow:visible!important}.report-icon img{display:block!important}
+/* Stabiele taal- en laadstatuscorrecties */
+.flag-button{width:42px!important;height:42px!important;padding:6px!important}.flag-button img{width:100%!important;height:100%!important;object-fit:contain!important}.rdw-card:disabled .rdw-wheel,.rdw-card.is-loading .rdw-wheel{width:140px!important;height:140px!important;max-width:90%!important;max-height:90%!important}.panel .toolbar{margin-bottom:12px}.contractSummary{margin:10px 0!important;padding:2px 0!important}.audit-fleet-kpi strong{margin-left:4px!important}
 </style><div class="header-space"><header id="brandHeader"><div class="brand-inner"><div class="brand-logo"><img src="logo-traxall.png" alt="TraXall"></div><div class="brand-copy"><h1>Vloot Analyse Intern</h1></div><a class="tools-back-link" href="https://traxallnetherlands.github.io/traxalltools/">&lt; Terug naar TraXall Tools</a></div></header></div><main>
 <section class="panel workspace-panel">
   <div class="top-fields-grid">
     <div id="fullDropZone" class="drop-zone fixed-top-card">
       <label for="file">Full Fleetoverview</label>
       <div class="file-picker"><button type="button" class="filePickButton" data-file-target="file">Selecteer of sleep bestand</button><span class="filePickName" data-file-name="file">Geen bestand gekozen</span><input id="file" type="file" accept=".xlsx" hidden></div>
-      <div id="fileinfo" class="muted requirement-text">Nodig voor alle checks</div>
+      <div id="fileinfo" class="muted upload-runtime-status" hidden></div><div class="muted requirement-text" data-nl="Nodig voor alle checks" data-en="Required for all checks">Nodig voor alle checks</div>
     </div>
     <div id="fleetDropZone" class="drop-zone fixed-top-card">
       <label for="fleetFile">Fleetoverview</label>
       <div class="file-picker"><button type="button" class="filePickButton" data-file-target="fleetFile">Selecteer of sleep bestand</button><span class="filePickName" data-file-name="fleetFile">Geen bestand gekozen</span><input id="fleetFile" type="file" accept=".xlsx" hidden></div>
-      <div id="fleetinfo" class="muted requirement-text">Nodig voor Vloot Audit en Payroll</div>
+      <div id="fleetinfo" class="muted upload-runtime-status" hidden></div><div class="muted requirement-text" data-nl="Nodig voor Vloot Audit en Payroll" data-en="Required for Fleet Audit and Payroll">Nodig voor Vloot Audit en Payroll</div>
     </div>
     <div id="payrollDropZone" class="drop-zone fixed-top-card">
       <label for="payrollFile">Payrollfile</label>
       <div class="file-picker"><button type="button" class="filePickButton" data-file-target="payrollFile">Selecteer of sleep bestand</button><span class="filePickName" data-file-name="payrollFile">Geen bestand gekozen</span><input id="payrollFile" type="file" accept=".xlsx" hidden></div>
-      <div id="payrollinfo" class="muted requirement-text">Nodig voor Payroll</div>
+      <div id="payrollinfo" class="muted upload-runtime-status" hidden></div><div class="muted requirement-text" data-nl="Nodig voor Payroll" data-en="Required for Payroll">Nodig voor Payroll</div>
     </div>
     <div class="reference-block fixed-top-card">
       <div class="field-line"><label for="reference"><strong>Peildatum:</strong></label><input id="reference" type="date" lang="nl-NL"></div>
@@ -480,10 +480,59 @@ const EN_PHRASES=[
 ['Fleetoverview extern ingelezen','External Fleet Overview loaded'],['Vloot Audit is beschikbaar','Fleet Audit is available'],['Full Fleetoverview','Full Fleet Overview'],['Fleetoverview','Fleet Overview'],['Werkblad ','Worksheet '],[' regels',' rows'],[' regel',' row'],['Geen dubbele berijder-ID’s in Actief / Inleverproces bezig','No duplicate driver IDs in Active / Return process in progress'],['Geen dubbele berijder-ID','No duplicate driver ID'],['in Actief / Inleverproces bezig','in Active / Return process in progress'],['ingelezen','loaded'],['beschikbaar','available'],['zonder RDW-datum','without RDW date'],['regels missen kilometerstand en/of kilometerdatum in Excel. Zie datacontrole.','rows are missing mileage and/or mileage date in Excel. See Data check.'],['Opnieuw ophalen gestart voor','Retry started for'],['regels met eerste toelating','rows with first admission'],['maanden verstreken · regels','months elapsed · rules'],['Niet controleerbaar','Not checkable'],['Controles totaal','Total checks'],['Voertuigen met auditmelding','Vehicles with audit signal'],['RDW en fiscale datacontrole','RDW and fiscal data check'],['De fiscale waarde, bijtelling, Registration Date, CO₂-uitstoot, APK en terugroepacties konden daarom niet als totaalaudit worden beoordeeld.','The fiscal value, company-car tax percentage, Registration Date and CO₂ emissions could therefore not be assessed as a complete audit.'],['Vloot op orde','Fleet accuracy'],['Elektrische auto’s','Electric vehicles'],['Gemiddelde CO₂-uitstoot','Average CO₂ emissions'],['Nulemissievoertuig','Zero-emission vehicle'],['niet gevuld','not filled in'],['wijkt af','differs'],
 ['Volledig akkoord','Fully correct'],['met afwijking','with deviation'],['niet volledig controleerbaar','not fully checkable'],['actieve voertuigen','active vehicles'],['voertuigen in deze selectie','vehicles in this selection'],['Fleetoverview extern','external Fleet Overview'],['afwijkingen op','deviations across'],['controles','checks'],['controle','check'],['afwijkingen','deviations'],['afwijking','deviation'],['dagen','days'],['dag','day'],['mnd','mo'],['maand','month'],['regels vragen opvolging','rows require follow-up'],['regels staan 2-4 dagen in status','rows have been in status for 2-4 days'],['regels met dubbele berijder-ID','rows with duplicate driver ID'],['Externe Fleetoverview niet ingelezen','External Fleet Overview not loaded'],['Upload Fleetoverview om audit toe te voegen','Upload Fleet Overview to include the audit'],['Belangrijkste signalen','Key signals'],['Beoordeeld','Assessed'],['Met melding','With signal'],['Dataproblemen','Data issues'],['Binnen marges','Within limits'],['Operationele opvolging','Operational follow-up'],['Opvolging','Follow-up'],['Regels die aandacht vragen','Rows requiring attention'],['Aflopende contracten en leveringsrisico','Expiring contracts and delivery risk'],['Binnen ','Within '],['Actie vereist','Action required'],['Eerstvolgende expiraties','Upcoming expirations'],['vernieuwde contract(en) met minimaal 1 maand overbrugging','renewed contract(s) with at least 1 month gap'],['Totale vloot','Total fleet'],['Managementoverzicht','Management overview'],['Contractmeldingen','Contract signals'],['Expiraties','Expirations'],['Vloot audit','Fleet audit'],['Statuscontrole','Status check'],['Kilometergebruik en contractsignalen','Mileage usage and contract signals'],['Dataproblemen','Data issues'],['Volledig akkoord','Fully correct'],['Nulemissievoertuig · RDW CO₂ leeg','Zero-emission vehicle · RDW CO₂ empty'],['Geen niet-vernieuwde actieve contracten binnen deze periode.','No non-renewed active contracts within this period.'],['Geen voertuigen voor deze selectie.','No vehicles in this selection.'],['Nieuwe auto bestellen?','Order new car?'],['Ja','Yes'],['Nee','No'],['Payroll','Payroll'],['Aankomende wijziging bijtelling','Upcoming company-car tax changes'],['Bijtelling wijzigt na afloop 60-maandsperiode','Company-car tax changes after the 60-month period'],['Rapportage totale vloot','Full fleet report'],['Kies rapportageformaat','Choose report format'],['Payrollrapport · wijziging bijtelling','Payroll report · company-car tax changes'],['Toont nulemissieauto’s waarvan de vaste 60-maandsperiode afloopt en waarvan de bijtelling daarna volgens de dan geldende regels wijzigt.','Shows zero-emission vehicles whose fixed 60-month period ends and whose company-car tax rate then changes under the rules applicable at that time.'],['Wijzigingen binnen','Changes within'],['Nog geen wijzigingen berekend.','No changes calculated yet.'],['Wijzigingsdatum','Change date'],['Huidige bijtelling','Current company-car tax'],['Nieuwe bijtelling','New company-car tax'],['Verschil','Difference'],['Payroll actie','Payroll action'],['Geen gegevens.','No data.'],['Payroll aanpassen vanaf deze datum','Update payroll from this date'],['Geen bijtellingswijzigingen binnen de gekozen periode.','No company-car tax changes within the selected period.'],['Upload beide bestanden om aankomende bijtellingswijzigingen te berekenen.','Upload both files to calculate upcoming company-car tax changes.'],['4. Payroll','4. Payroll'],['5. Vloot Audit','5. Fleet Audit'],['Upload Payrollfile','Upload Payroll file'],['(voor Vloot Audit & Payroll)','(for Fleet Audit & Payroll)'],['(voor Payroll)','(for Payroll)'],['Nodig voor Vloot Audit en Payroll.','Required for Fleet Audit and Payroll.'],['Nodig samen met Fleetoverview voor Payroll.','Required together with Fleet Overview for Payroll.'],['Acties','Actions'],['Payroll overzicht','PAYROLL OVERVIEW'],['Verandering van de bijtelling','COMPANY-CAR TAX CHANGES'],['Waarschuwing binnen','Warning within'],['Medewerker','Employee'],['Payroll bijtelling','Payroll company-car tax'],['Fleet bijtelling','Fleet company-car tax'],['Controle','Check'],['RDW acties','RDW actions'],['APK verloopt binnen 28 dagen','APK expires within 28 days'],['APK is verlopen','APK has expired'],['Openstaande terugroepactie','Open recall'],['Openstaande terugroepacties','Open recalls'],['Terugroepacties niet controleerbaar','Recalls not checkable'],['Gebaseerd op 5 controles per actief voertuig.','Based on 5 checks per active vehicle.']
 ];
+EN_EXACT.set('Contracten < … maanden negeren','Ignore contracts < … months');
+EN_EXACT.set('Zoek kenteken, berijder of leverancier…','Search license plate, driver or supplier…');
+EN_EXACT.set('Geen contracten voor deze selectie.','No contracts for this selection.');
+EN_EXACT.set('Rapportages','Reports');
+EN_EXACT.set('Peildatum:','Reference date:');
+EN_EXACT.set('Taal:','Language:');
 function enText(v){if(v==null)return v;let s=String(v);const trimmed=s.trim();if(EN_EXACT.has(trimmed)){const lead=s.match(/^\s*/)[0],trail=s.match(/\s*$/)[0];return lead+EN_EXACT.get(trimmed)+trail}for(const [a,b] of EN_PHRASES)s=s.split(a).join(b);s=s.replace(/(\d+) niet-vernieuwde contracten binnen (\d+) maanden/g,'$1 non-renewed contracts within $2 months');s=s.replace(/(\d+) voertuigen in deze selectie/g,'$1 vehicles in this selection');s=s.replace(/(\d+) actieve voertuigen/g,'$1 active vehicles');s=s.replace(/(\d+) met afwijking(?:en)?/g,'$1 with deviation(s)');s=s.replace(/(\d+) niet volledig controleerbaar/g,'$1 not fully checkable');s=s.replace(/(\d+) volledig akkoord/g,'$1 fully correct');s=s.replace(/(\d+) afwijking(?:en)? op (\d+) controles/g,'$1 deviation(s) across $2 checks');s=s.replace(/Werkblad\s+/g,'Worksheet ');s=s.replace(/\b(\d+) regels\b/g,'$1 rows');s=s.replace(/\b(\d+) regel\b/g,'$1 row');s=s.replace(/\bingelezen\b/gi,'loaded');s=s.replace(/\bbeschikbaar\b/gi,'available');s=s.replace(/Geen dubbele berijder-ID’s? in Actief \/ Inleverproces bezig/g,'No duplicate driver IDs in Active / Return process in progress');return s}
-function translateSubtree(root){if(!root)return;const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;while(n=walker.nextNode()){if(!n.nodeValue.trim())continue;if(!originalNodeText.has(n))originalNodeText.set(n,n.nodeValue);const wanted=uiLang==='en'?enText(originalNodeText.get(n)):originalNodeText.get(n);if(n.nodeValue!==wanted)n.nodeValue=wanted}const els=root.nodeType===1?[root,...root.querySelectorAll('*')]:[];for(const el of els){for(const a of ['placeholder','title','aria-label']){if(!el.hasAttribute?.(a))continue;let rec=originalAttrs.get(el);if(!rec){rec={};originalAttrs.set(el,rec)}if(!(a in rec))rec[a]=el.getAttribute(a);const wanted=uiLang==='en'?enText(rec[a]):rec[a];if(el.getAttribute(a)!==wanted)el.setAttribute(a,wanted)}}}
-function applyLanguage(lang){uiLang=lang;document.documentElement.lang=lang;translateSubtree(document.body);document.title=lang==='en'?'Fleet analysis internal':'Vloot analyse intern';$('langNl')?.classList.toggle('active',lang==='nl');$('langEn')?.classList.toggle('active',lang==='en');if($('languageToggle'))$('languageToggle').checked=lang==='en';document.querySelectorAll('.filePickButton').forEach(b=>b.textContent=lang==='en'?'Choose file':'Bestand kiezen');document.querySelectorAll('.filePickName').forEach(n=>{if(!n.dataset.selectedName)n.textContent=lang==='en'?'No file chosen':'Geen bestand gekozen'});try{if(typeof renderAudit==='function'&&$('auditContent')&&!$('auditContent').hidden)renderAudit();if(typeof recalcPayrollReport==='function'&&(( $('payrollContent')&&!$('payrollContent').hidden)||($('auditContent')&&!$('auditContent').hidden)))recalcPayrollReport();if(typeof renderExpiry==='function'&&$('expiryPanel')&&!$('expiryPanel').hidden)renderExpiry();if(typeof renderContracts==='function'&&$('contractPanel')&&!$('contractPanel').hidden)renderContracts();if(typeof render==='function'&&$('statusPanel')&&!$('statusPanel').hidden)render()}catch(e){}try{localStorage.setItem('vlootLang',lang)}catch(e){}}
-const languageObserver=new MutationObserver(ms=>{for(const m of ms)for(const n of m.addedNodes){if(n.nodeType===1||n.nodeType===3)translateSubtree(n.nodeType===3?n.parentNode:n)}});languageObserver.observe(document.body,{childList:true,subtree:true,characterData:true});
+let languageObserver=null,languageBusy=false;
+function translateSubtree(root){
+ if(!root||languageBusy)return;
+ languageBusy=true;
+ try{
+  const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;
+  while(n=walker.nextNode()){
+   if(!n.nodeValue.trim()||n.parentElement?.closest('script,style'))continue;
+   if(!originalNodeText.has(n))originalNodeText.set(n,n.nodeValue);
+   const original=originalNodeText.get(n),wanted=uiLang==='en'?enText(original):original;
+   if(n.nodeValue!==wanted)n.nodeValue=wanted;
+  }
+  const els=root.nodeType===1?[root,...root.querySelectorAll('*')]:[];
+  for(const el of els){
+   if(el.dataset?.nl&&el.dataset?.en){el.textContent=uiLang==='en'?el.dataset.en:el.dataset.nl;continue}
+   for(const a of ['placeholder','title','aria-label']){
+    if(!el.hasAttribute?.(a))continue;let rec=originalAttrs.get(el);if(!rec){rec={};originalAttrs.set(el,rec)}
+    if(!(a in rec))rec[a]=el.getAttribute(a);const wanted=uiLang==='en'?enText(rec[a]):rec[a];if(el.getAttribute(a)!==wanted)el.setAttribute(a,wanted)
+   }
+  }
+ }finally{languageBusy=false}
+}
+function connectLanguageObserver(){
+ if(languageObserver)languageObserver.disconnect();
+ languageObserver=new MutationObserver(ms=>{
+  if(languageBusy)return;languageObserver.disconnect();
+  try{for(const m of ms)for(const n of m.addedNodes){if(n.nodeType===1||n.nodeType===3)translateSubtree(n.nodeType===3?n.parentNode:n)}}
+  finally{languageObserver.observe(document.body,{childList:true,subtree:true})}
+ });
+ languageObserver.observe(document.body,{childList:true,subtree:true});
+}
+function applyLanguage(lang){
+ if(lang!=='en'&&lang!=='nl')lang='nl';
+ languageObserver?.disconnect();uiLang=lang;document.documentElement.lang=lang;
+ try{
+  translateSubtree(document.body);
+  document.title=lang==='en'?'Fleet analysis internal':'Vloot analyse intern';
+  if($('languageToggle'))$('languageToggle').checked=lang==='en';
+  document.querySelectorAll('.filePickButton').forEach(b=>b.textContent=lang==='en'?'Choose or drop file':'Selecteer of sleep bestand');
+  document.querySelectorAll('.filePickName').forEach(n=>{if(!n.dataset.selectedName)n.textContent=lang==='en'?'No file chosen':'Geen bestand gekozen'});
+  try{if(typeof renderAudit==='function'&&$('auditContent')&&!$('auditContent').hidden)renderAudit();if(typeof recalcPayrollReport==='function'&&$('payrollContent')&&!$('payrollContent').hidden)recalcPayrollReport();if(typeof renderExpiry==='function'&&$('expiryPanel')&&!$('expiryPanel').hidden)renderExpiry();if(typeof renderContracts==='function'&&$('contractPanel')&&!$('contractPanel').hidden)renderContracts();if(typeof render==='function'&&$('statusPanel')&&!$('statusPanel').hidden)render()}catch(e){console.error('Language rerender:',e)}
+  translateSubtree(document.body);
+  document.querySelectorAll('[data-nl][data-en]').forEach(el=>el.textContent=lang==='en'?el.dataset.en:el.dataset.nl);
+  try{localStorage.setItem('vlootLang',lang)}catch(e){}
+ }finally{connectLanguageObserver()}
+}
 
 document.querySelectorAll('.filePickButton').forEach(b=>b.addEventListener('click',()=>$(b.dataset.fileTarget)?.click()));
 document.querySelectorAll('input[type=file]').forEach(inp=>inp.addEventListener('change',()=>{const n=document.querySelector(`[data-file-name="${inp.id}"]`);if(n&&inp.files?.[0]){n.dataset.selectedName=inp.files[0].name;n.textContent=inp.files[0].name}}));
@@ -511,13 +560,12 @@ if(window.CanvasRenderingContext2D&&!CanvasRenderingContext2D.prototype.__vlootI
 (function(){
  const byId=id=>document.getElementById(id);
  // Keep requirement texts immutable when source handlers overwrite file-info elements.
- const requirements={fileinfo:uiLang==='en'?'Required for all checks':'Nodig voor alle checks',fleetinfo:uiLang==='en'?'Required for Fleet Audit and Payroll':'Nodig voor Vloot Audit en Payroll',payrollinfo:uiLang==='en'?'Required for Payroll':'Nodig voor Payroll'};
- for(const [id,text] of Object.entries(requirements)){const el=byId(id);if(!el)continue;const lock=()=>{if(el.textContent!==text)el.textContent=text};new MutationObserver(lock).observe(el,{childList:true,subtree:true,characterData:true});lock()}
+ /* upload requirement labels are now separate static elements */
  // RDW card: only spinner while disabled/fetching, dimensions remain fixed.
  const rdw=byId('rdwRetry');if(rdw){const sync=()=>rdw.classList.toggle('is-loading',rdw.disabled);new MutationObserver(sync).observe(rdw,{attributes:true,attributeFilter:['disabled']});sync()}
  // Direct report buttons reuse the original report dialog choices.
- byId('reportPdfDirect')?.addEventListener('click',()=>{if(byId('pdfReport')?.disabled)return;byId('pdfReport').click();setTimeout(()=>byId('reportPdfChoice')?.click(),30)});
- byId('reportPptDirect')?.addEventListener('click',()=>{if(byId('pdfReport')?.disabled)return;byId('pdfReport').click();setTimeout(()=>byId('reportPptChoice')?.click(),30)});
+ byId('reportPdfDirect')?.addEventListener('click',()=>{if(records.length)downloadFleetPdf()});
+ byId('reportPptDirect')?.addEventListener('click',()=>{if(records.length)downloadFleetPptx()});
  const reportEnable=()=>{const enabled=!byId('pdfReport')?.disabled;byId('reportPdfDirect').disabled=!enabled;byId('reportPptDirect').disabled=!enabled};if(byId('pdfReport'))new MutationObserver(reportEnable).observe(byId('pdfReport'),{attributes:true});reportEnable();
  // Force the environment heading to remain Statuscontrole and mirror stable tab counts.
  const heading=byId('heading');if(heading)new MutationObserver(()=>{if(heading.textContent!=='Statuscontrole')heading.textContent='Statuscontrole'}).observe(heading,{childList:true,subtree:true,characterData:true});
@@ -526,7 +574,7 @@ if(window.CanvasRenderingContext2D&&!CanvasRenderingContext2D.prototype.__vlootI
  const cleanPayroll=()=>{document.querySelectorAll('#payrollPanel h2,#payrollPanel h3,#payrollPanel .payroll-section-title').forEach(el=>{const t=el.textContent.trim();if(t==='PAYROLL')el.textContent='Payroll';if(t==='PAYROLL OVERZICHT')el.textContent='Payroll overzicht';if(t.includes('VERANDERING')&&t.includes('BIJTELLING'))el.textContent='Verandering van de bijtelling'})};new MutationObserver(cleanPayroll).observe(byId('payrollPanel'),{childList:true,subtree:true});cleanPayroll();
  // Put Vloot-op-orde score in the fifth compact summary card and format the two KPI sentences.
  function refineAudit(){const summary=byId('auditSummary'),score=byId('auditScoreValue');if(summary&&score){let inline=byId('auditScoreInline');if(!inline){inline=document.createElement('div');inline.id='auditScoreInline';inline.className='audit-score-inline';summary.appendChild(inline)}inline.textContent=(uiLang==='en'?'Fleet in order: ':'Vloot op orde: ')+score.textContent}const ev=byId('auditEvShare'),evc=byId('auditEvCount'),co=byId('auditCo2Average'),coc=byId('auditCo2Count');if(ev&&evc){const card=ev.closest('.audit-fleet-kpi');card.innerHTML='<span>Elektrisch aandeel vloot</span><strong>'+ev.textContent+'</strong><small>('+evc.textContent.replace(/^.*?(\d+\s+van\s+\d+.*)$/i,'$1').replace(/^—$/,'')+')</small>';card.querySelector('strong').id='auditEvShare';card.querySelector('small').id='auditEvCount'}if(co&&coc){const card=co.closest('.audit-fleet-kpi');card.innerHTML='<span>Gemiddelde CO₂-uitstoot</span><strong>'+co.textContent+'</strong>';card.querySelector('strong').id='auditCo2Average'}}
- /* Disabled: recursive audit observer caused repeated parentheses and infinite width. */
+ /* recursive audit observer disabled */
  // Remove non-functional explanatory/count text without removing data controls.
  ['contractCount','count','expiryCount','payrollCount','auditCount'].forEach(id=>{const e=byId(id);if(e)e.hidden=true});
  document.querySelectorAll('#payrollPanel>p.muted,#auditPanel .audit-header-copy p').forEach(e=>e.remove());
@@ -534,29 +582,16 @@ if(window.CanvasRenderingContext2D&&!CanvasRenderingContext2D.prototype.__vlootI
  function escXml(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[c]))}function xcol(n){let r='';for(n++;n;n=Math.floor((n-1)/26))r=String.fromCharCode(65+(n-1)%26)+r;return r}function tableSheet(selector){const t=document.querySelector(selector+' table');if(!t)return null;const h=[...t.querySelectorAll('thead th')].filter(x=>getComputedStyle(x).display!=='none').map(x=>x.innerText.trim()),rows=[...t.querySelectorAll('tbody tr')].filter(r=>!r.querySelector('.empty')).map(r=>[...r.children].filter(x=>getComputedStyle(x).display!=='none').map(x=>x.innerText.trim()));return h.length?{h,rows}:null}
  async function totalWorkbook(){const defs=[['Contractcontrole','#contractPanel'],['Statuscontrole','#statusPanel'],['Expiraties','#expiryPanel'],['Payroll','#payrollPanel'],['Vloot Audit','#auditPanel']],sheets=defs.map(([n,q])=>[n,tableSheet(q)]).filter(x=>x[1]);if(!sheets.length||typeof JSZip==='undefined'){byId('notice').textContent='Voer eerst minimaal één controle uit.';return}const z=new JSZip();z.file('[Content_Types].xml','<?xml version="1.0"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/>'+sheets.map((_,i)=>'<Override PartName="/xl/worksheets/sheet'+(i+1)+'.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>').join('')+'</Types>');z.folder('_rels').file('.rels','<?xml version="1.0"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>');z.folder('xl').file('workbook.xml','<?xml version="1.0"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets>'+sheets.map(([n],i)=>'<sheet name="'+escXml(n)+'" sheetId="'+(i+1)+'" r:id="rId'+(i+1)+'"/>').join('')+'</sheets></workbook>');z.folder('xl').folder('_rels').file('workbook.xml.rels','<?xml version="1.0"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'+sheets.map((_,i)=>'<Relationship Id="rId'+(i+1)+'" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet'+(i+1)+'.xml"/>').join('')+'</Relationships>');const ws=z.folder('xl').folder('worksheets');sheets.forEach(([n,d],si)=>{const all=[d.h,...d.rows],xml=all.map((r,ri)=>'<row r="'+(ri+1)+'">'+r.map((v,ci)=>'<c r="'+xcol(ci)+(ri+1)+'" t="inlineStr"><is><t xml:space="preserve">'+escXml(v)+'</t></is></c>').join('')+'</row>').join('');ws.file('sheet'+(si+1)+'.xml','<?xml version="1.0"?><worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetViews><sheetView workbookViewId="0"><pane ySplit="1" topLeftCell="A2" activePane="bottomLeft" state="frozen"/></sheetView></sheetViews><sheetData>'+xml+'</sheetData><autoFilter ref="A1:'+xcol(d.h.length-1)+Math.max(1,all.length)+'"/></worksheet>')});const blob=await z.generateAsync({type:'blob',compression:'DEFLATE'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='Vloot-analyse-rapportages-'+(byId('reference')?.value||'export')+'.xlsx';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
  const total=byId('totalExcelExport');if(total){const clone=total.cloneNode(true);total.replaceWith(clone);clone.addEventListener('click',totalWorkbook)}
- /* Audit KPI formatting is handled by the stable patch below. */
+ /* stable audit formatting below */
 })();
 
 
-/* Stable final corrections */
+/* Final stable UI hooks */
 (function(){
  const get=id=>document.getElementById(id);
- // Reliable language buttons use the application's native applyLanguage function directly.
- const nl=get('langNlButton'),en=get('langEnButton');
- if(nl){const c=nl.cloneNode(true);nl.replaceWith(c);c.addEventListener('click',()=>{applyLanguage('nl');try{localStorage.setItem('vlootLang','nl')}catch(e){};c.classList.add('active');get('langEnButton')?.classList.remove('active')})}
- if(en){const current=get('langEnButton'),c=current.cloneNode(true);current.replaceWith(c);c.addEventListener('click',()=>{applyLanguage('en');try{localStorage.setItem('vlootLang','en')}catch(e){};c.classList.add('active');get('langNlButton')?.classList.remove('active')})}
- // Direct exports, with no modal opening or timing race.
- const pdf=get('reportPdfDirect'),ppt=get('reportPptDirect');
- if(pdf){const c=pdf.cloneNode(true);pdf.replaceWith(c);c.addEventListener('click',()=>{if(!records.length){get('notice').textContent=uiLang==='en'?'Upload the Full Fleet Overview first.':'Upload eerst de Full Fleetoverview.';return}downloadFleetPdf()})}
- if(ppt){const c=ppt.cloneNode(true);ppt.replaceWith(c);c.addEventListener('click',()=>{if(!records.length){get('notice').textContent=uiLang==='en'?'Upload the Full Fleet Overview first.':'Upload eerst de Full Fleetoverview.';return}downloadFleetPptx()})}
- // Stable audit KPI formatting. Run once per actual render, never observe our own text changes.
- let auditQueued=false,lastAuditSignature='';
- function stableAuditKpis(){auditQueued=false;const score=get('auditScoreValue'),summary=get('auditSummary');if(score&&summary){let card=get('auditScoreInline');if(!card){card=document.createElement('div');card.id='auditScoreInline';card.className='audit-score-inline';summary.appendChild(card)}card.textContent=(uiLang==='en'?'Fleet in order: ':'Vloot op orde: ')+score.textContent.trim()}
- const ev=get('auditEvShare'),evCount=get('auditEvCount'),co=get('auditCo2Average');
- if(ev){const card=ev.closest('.audit-fleet-kpi');const value=ev.textContent.trim(),count=(evCount?.textContent||'').trim().replace(/^\(+|\)+$/g,'');card.replaceChildren();const label=document.createElement('span');label.textContent=uiLang==='en'?'Electric fleet share':'Elektrisch aandeel vloot';const val=document.createElement('strong');val.id='auditEvShare';val.textContent=value;card.append(label,val);if(count){const small=document.createElement('small');small.id='auditEvCount';small.textContent=' ('+count+')';card.appendChild(small)}}
- if(co){const card=co.closest('.audit-fleet-kpi'),value=co.textContent.trim();card.replaceChildren();const label=document.createElement('span');label.textContent=uiLang==='en'?'Average CO₂ emissions':'Gemiddelde CO₂-uitstoot';const val=document.createElement('strong');val.id='auditCo2Average';val.textContent=' '+value;card.append(label,val)}
- lastAuditSignature=[score?.textContent,ev?.textContent,co?.textContent].join('|')}
- const audit=get('auditContent');if(audit)new MutationObserver(()=>{const raw=[get('auditScoreValue')?.textContent,get('auditEvShare')?.textContent,get('auditCo2Average')?.textContent].join('|');if(!auditQueued&&raw!==lastAuditSignature){auditQueued=true;requestAnimationFrame(stableAuditKpis)}}).observe(audit,{childList:true,subtree:true});
- if(!get('auditPanel')?.hidden)requestAnimationFrame(stableAuditKpis);
+ // Remove old click listeners by cloning, then call applyLanguage once.
+ for(const [id,lang] of [['langNlButton','nl'],['langEnButton','en']]){const old=get(id);if(!old)continue;const fresh=old.cloneNode(true);old.replaceWith(fresh);fresh.addEventListener('click',()=>{applyLanguage(lang);get('langNlButton')?.classList.toggle('active',lang==='nl');get('langEnButton')?.classList.toggle('active',lang==='en')})}
+ function stableAuditKpis(){const score=get('auditScoreValue'),summary=get('auditSummary');if(score&&summary){let card=get('auditScoreInline');if(!card){card=document.createElement('div');card.id='auditScoreInline';card.className='audit-score-inline';summary.appendChild(card)}card.textContent=(uiLang==='en'?'Fleet in order: ':'Vloot op orde: ')+score.textContent.trim()}const co=get('auditCo2Average');if(co&&co.previousElementSibling?.tagName==='SPAN')co.style.marginLeft='4px'}
+ get('auditTab')?.addEventListener('click',()=>setTimeout(stableAuditKpis,0));
 })();
 </script></html>
