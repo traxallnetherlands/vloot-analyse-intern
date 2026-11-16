@@ -84,6 +84,33 @@ body{padding:20px!important}.header-space{height:auto!important;max-width:1400px
 #payrollPanel .payroll-panel-body:first-of-type>.payroll-overview-actions #payrollExport{margin:0!important}
 #payrollPanel .payroll-panel-body:first-of-type>.tablewrap{border:1px solid #dbe5ee!important;border-radius:10px!important;overflow:auto!important;margin:0!important}
 @media(max-width:1050px){#contractPanel>.toolbar:not(.settings),#statusPanel>.toolbar,#expiryPanel>.toolbar:not(.settings),#auditPanel .toolbar{grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto!important}#contractPanel #contractFilter,#statusPanel #status,#contractPanel #contractSearch,#statusPanel #search,#expiryPanel #expirySearch,#auditPanel #auditSearch{width:100%!important;min-width:0!important;max-width:none!important}#contractPanel #contractExport,#statusPanel #export,#expiryPanel #expiryExport,#auditPanel #auditExport{grid-column:3!important}}
+
+/* 16-11-2026 laatste gerichte layoutcorrecties */
+/* Uploadvelden: inhoud als één compacte groep exact verticaal gecentreerd. */
+.top-fields-grid .drop-zone.fixed-top-card{height:118px!important;min-height:118px!important;max-height:118px!important;padding:8px 10px!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:4px!important}
+.top-fields-grid .drop-zone label{display:block!important;min-height:0!important;height:auto!important;margin:0!important;line-height:18px!important}
+.top-fields-grid .drop-zone .file-picker{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;width:100%!important;min-height:0!important;height:auto!important;margin:0!important;gap:2px!important}
+.top-fields-grid .drop-zone .filePickButton{margin:0!important}
+.top-fields-grid .drop-zone .filePickName{display:block!important;width:100%!important;height:16px!important;min-height:16px!important;max-height:16px!important;margin:0!important;line-height:16px!important;text-align:center!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+.top-fields-grid .drop-zone .requirement-text{display:block!important;width:100%!important;height:auto!important;min-height:0!important;margin:0!important;line-height:16px!important;text-align:center!important}
+/* De overige twee kaarten volgen dezelfde compacte rijhoogte. */
+.top-fields-grid .reference-block.fixed-top-card,.top-fields-grid .rdw-card.fixed-top-card{height:118px!important;min-height:118px!important;max-height:118px!important}
+.top-fields-grid .reference-block{justify-content:center!important;padding:8px 10px!important;gap:5px!important}
+.top-fields-grid .rdw-card{justify-content:center!important;padding:8px 10px!important;gap:3px!important}
+.top-fields-grid .rdw-card:disabled .rdw-wheel,.top-fields-grid .rdw-card.is-loading .rdw-wheel{width:92px!important;height:92px!important;max-width:78%!important;max-height:78%!important}
+/* Contract/Status: zoekveld eerst, identieke dropdown direct RECHTS daarvan, export helemaal rechts. */
+#contractPanel>.toolbar:not(.settings),#statusPanel>.toolbar{grid-template-columns:360px 360px minmax(0,1fr) auto!important}
+#contractPanel #contractSearch,#statusPanel #search{grid-column:1!important;grid-row:1!important;width:360px!important;min-width:360px!important;max-width:360px!important}
+#contractPanel #contractFilter,#statusPanel #status{grid-column:2!important;grid-row:1!important;width:360px!important;min-width:360px!important;max-width:360px!important;margin:0!important}
+#contractPanel #contractExport,#statusPanel #export{grid-column:4!important;grid-row:1!important;justify-self:end!important}
+/* Payroll: export op titelhoogte, geheel rechts, buiten de tablewrap/resultatenkaart. */
+#payrollPanel #payrollContent{position:relative!important}
+#payrollPanel .payroll-titlebar{position:relative!important;margin-top:12px!important}
+#payrollPanel .payroll-panel-body:first-of-type{position:static!important;overflow:visible!important;border:0!important;background:transparent!important;padding-top:0!important;margin-top:10px!important}
+#payrollPanel .payroll-panel-body:first-of-type>.payroll-overview-actions{position:absolute!important;top:12px!important;right:0!important;width:auto!important;height:54px!important;display:flex!important;align-items:center!important;justify-content:flex-end!important;padding:0!important;margin:0!important;background:transparent!important;border:0!important;z-index:6!important}
+#payrollPanel .payroll-panel-body:first-of-type>.payroll-overview-actions #payrollExport{position:static!important;margin:0!important}
+#payrollPanel .payroll-panel-body:first-of-type>.tablewrap{margin-top:0!important;border:1px solid #dbe5ee!important;border-radius:10px!important;overflow:auto!important}
+@media(max-width:1050px){#contractPanel #contractSearch,#statusPanel #search,#contractPanel #contractFilter,#statusPanel #status{width:100%!important;min-width:0!important;max-width:none!important}#contractPanel #contractSearch,#statusPanel #search{grid-column:1!important}#contractPanel #contractFilter,#statusPanel #status{grid-column:2!important}#contractPanel #contractExport,#statusPanel #export{grid-column:3!important}}
 </style><div class="header-space"><header id="brandHeader"><div class="brand-inner"><div class="brand-logo"><img src="logo-traxall.png" alt="TraXall"></div><div class="brand-copy"><h1>Vloot Analyse Intern</h1></div><a class="tools-back-link" href="https://traxallnetherlands.github.io/traxalltools/">&lt; Terug naar TraXall Tools</a></div></header></div><main>
 <section class="panel workspace-panel">
   <div class="top-fields-grid">
