@@ -729,26 +729,61 @@ function translateResultTables(){
  requestAnimationFrame(translateResultTables);
 })();
 
-/* Final regression-safe UI corrections */
+/* Final regression-safe UI corrections: idempotent result translation */
 (function(){
- // Always start Dutch; controls do not persist user language outside current page.
  try{localStorage.removeItem('vlootLang')}catch(e){}
- function translateCellTree(root){
-  if(!root)return;const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;
-  while(n=walker.nextNode()){
-   if(!n.nodeValue.trim())continue;
-   if(n.parentElement?.closest('script,style'))continue;
-   if(!n.parentElement?.dataset.nlResultText)n.parentElement.dataset.nlResultText=n.nodeValue;
-   const nl=n.parentElement.dataset.nlResultText;n.nodeValue=uiLang==='en'?resultTranslate(nl):nl;
-  }
+ const AUDIT_EXACT_EN=new Map([
+  ['Geen voertuigen in deze selectie.','No vehicles in this selection.'],
+  ['RDW: voertuig niet gevonden','RDW: vehicle not found'],
+  ['APK verlopen','APK expired'],
+  ['APK niet controleerbaar','MOT status not checkable'],
+  ['Terugroepacties niet controleerbaar','Recalls not checkable'],
+  ['Recall niet controleerbaar','Recall not checkable'],
+  ['Geen openstaande terugroepacties','No open recalls'],
+  ['Geen terugroepacties','No recalls'],
+  ['Registration Date wijkt af van RDW','Registration Date differs from RDW'],
+  ['Registration Date niet controleerbaar','Registration Date not checkable'],
+  ['Fiscale waarde wijkt af van RDW','Fiscal value differs from RDW'],
+  ['Fiscale waarde niet controleerbaar','Fiscal value not checkable'],
+  ['CO₂-uitstoot wijkt af van RDW','CO₂ emissions differ from RDW'],
+  ['CO₂-uitstoot niet controleerbaar','CO₂ emissions not checkable'],
+  ['Bijtelling wijkt af','Company-car tax differs'],
+  ['Bijtelling niet controleerbaar','Company-car tax not checkable'],
+  ['Niet controleerbaar','Not checkable'],
+  ['Afwijking','Deviation'],
+  ['Geen afwijkingen','No deviations'],
+  ['Akkoord','OK']
+ ]);
+ const originalResultTranslate=resultTranslate;
+ resultTranslate=function(value){
+  if(value==null||uiLang!=='en')return value;
+  const raw=String(value),trim=raw.trim();
+  if(AUDIT_EXACT_EN.has(trim))return raw.replace(trim,AUDIT_EXACT_EN.get(trim));
+  // Already translated output must never be translated a second time.
+  if(/\b(No vehicles in this selection|RDW: vehicle not found|APK expired|MOT status not checkable|Recalls? not checkable|No open recalls|No recalls|Registration Date differs from RDW|Registration Date not checkable|Fiscal value differs from RDW|Fiscal value not checkable|CO₂ emissions differ from RDW|CO₂ emissions not checkable|Company-car tax differs|Company-car tax not checkable|Not checkable|No deviations)\b/i.test(trim))return raw;
+  return originalResultTranslate(raw);
+ };
+ function translateElement(el){
+  if(!el)return;
+  if(!el.dataset.nlTextStable)el.dataset.nlTextStable=el.textContent;
+  const nl=el.dataset.nlTextStable;
+  const translated=uiLang==='en'?resultTranslate(nl):nl;
+  if(el.children.length===0)el.textContent=translated;
  }
  window.translateResultTables=function(){
   for(const id of ['contractPanel','statusPanel','expiryPanel','payrollPanel','auditPanel']){
    const panel=document.getElementById(id);if(!panel)continue;
-   panel.querySelectorAll('table thead th,table tbody td').forEach(translateCellTree);
+   panel.querySelectorAll('table thead th,table tbody td').forEach(cell=>{
+    if(cell.children.length===0){translateElement(cell);return;}
+    const leaves=cell.querySelectorAll('span,small,strong,em,b,i');
+    leaves.forEach(el=>{if(el.children.length===0)translateElement(el)});
+   });
   }
   const heading=document.getElementById('heading');if(heading)heading.textContent='Statuscontrole';
  };
+ const audit=document.getElementById('auditPanel');
+ if(audit)new MutationObserver(()=>requestAnimationFrame(window.translateResultTables)).observe(audit,{childList:true,subtree:true});
+ requestAnimationFrame(window.translateResultTables);
  const h=document.getElementById('brandHeader');h?.classList.remove('compact');
 })();
 </script></html>
